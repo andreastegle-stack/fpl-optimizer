@@ -12,8 +12,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14"
           cache: pip
@@ -26,19 +26,19 @@ jobs:
   model-gate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14"
           cache: pip
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: .cache/vaastav
           key: vaastav-${{ hashFiles('config/settings.json') }}
           restore-keys: vaastav-
       - run: pip install -e .
       - run: python -m fpl_optimizer.gate --out results/backtest.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: backtest
