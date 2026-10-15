@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+
+  # The model gate (CLAUDE.md): backtests FPL form, the baseline and, once it exists,
+  # our model on a full past season. Fails if a registered model does not beat both,
+  # or if settings switch advice to a model that has not passed.
+  model-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: .cache/vaastav
+          key: vaastav-${{ hashFiles('config/settings.json') }}
+          restore-keys: vaastav-
+      - run: pip install -e .
+      - run: python -m fpl_optimizer.gate --out results/backtest.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backtest
+          path: results/backtest.json
