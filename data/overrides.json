@@ -1,0 +1,4 @@
+{
+  "_comment": "Player news Andreas tells Claude in chat (injuries, roles). Claude records them here. availability is the chance of playing, 0-1, applied from from_gw to until_gw (both optional). It overrides FPL's own injury flags.",
+  "overrides": []
+}

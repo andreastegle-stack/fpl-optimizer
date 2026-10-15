@@ -218,3 +218,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# fpl-optimizer
+# Secrets: never commit any env file (see CLAUDE.md, Security)
+.env*
+*.env
+# Local caches and build output
+.cache/
+/site/

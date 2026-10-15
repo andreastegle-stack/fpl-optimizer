@@ -1,0 +1,14 @@
+fpl-optimizer
+Copyright (c) 2026 andreastegle-stack. Licensed under the MIT License (see LICENSE).
+
+This project includes a transfer-planning formulation adapted from
+open-fpl-solver by Solio Analytics (https://github.com/solioanalytics/open-fpl-solver),
+licensed under the Apache License, Version 2.0 (see LICENSES/open-fpl-solver-Apache-2.0.txt).
+Changes: rewritten for a single manager around our own projections; lean variable set
+(single bench indicator, vice-captain and bench order set after solving from next
+gameweek's projections only); diminishing value of banked free transfers; a safety
+margin on hits; chip opportunity costs ("hold values") instead of chip limits only.
+
+Historical data for backtests comes from vaastav/Fantasy-Premier-League
+(https://github.com/vaastav/Fantasy-Premier-League) and is downloaded at run time,
+not redistributed. Live data comes from the public Fantasy Premier League API.
