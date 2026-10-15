@@ -1,0 +1,13 @@
+{
+  "_comment": "Transfers Andreas has made in the FPL app since the last deadline. Claude records them from chat. Entries for a gameweek whose deadline has passed are ignored automatically (the public picks then show them).",
+  "transfers": [
+    {
+      "event": 7,
+      "out": 497,
+      "out_name": "Dubravka",
+      "in": 572,
+      "in_name": "Tzolakis",
+      "recorded": "2026-10-15"
+    }
+  ]
+}

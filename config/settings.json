@@ -1,0 +1,21 @@
+{
+  "entry_id": 5843001,
+  "projection_source": "baseline",
+  "backtest_season": "2025-26",
+  "horizon": 6,
+  "solver": {
+    "decay": 0.9,
+    "ft_values": [0, 0, 1.5, 2.5, 3.2, 3.6],
+    "bench_weight": 0.08,
+    "hit_cost": 4,
+    "hit_margin": 2,
+    "time_limit_s": 60,
+    "mip_gap": 0.002,
+    "pool_size": {"1": 10, "2": 30, "3": 35, "4": 20}
+  },
+  "chips": {
+    "_comment": "Expected points we give up by spending a chip now instead of later in its window. Triple Captain and Bench Boost estimate this from the projections; Wildcard and Free Hit use these fixed values. Free Hit is only considered in blank or double gameweeks, or in the last week before it expires.",
+    "hold_value": {"wildcard": 25, "freehit": 10}
+  },
+  "report_url": "https://andreastegle-stack.github.io/fpl-optimizer/"
+}

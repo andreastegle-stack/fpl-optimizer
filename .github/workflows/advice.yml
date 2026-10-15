@@ -1,0 +1,101 @@
+name: Advice
+
+# Every morning after the nightly price change (00:00 UK = 23:00 or 00:00 UTC), and a
+# check every half hour that runs the deadline advice once, about 3 hours before each
+# deadline (deadlines are read from the FPL API, so no dates are hard-coded here).
+on:
+  schedule:
+    - cron: "30 1 * * *"
+    - cron: "5,35 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "morning = update the page; deadline = also save the final advice and send the email"
+        type: choice
+        options: [morning, deadline]
+        default: morning
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: advice
+  cancel-in-progress: false
+
+env:
+  FPL_ADVICE_DIR: state/history/advice
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.mode.outputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: state
+          path: state
+      - id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          MORNING=""
+          if [ "${{ github.event.schedule }}" = "30 1 * * *" ]; then MORNING="--morning"; fi
+          PYTHONPATH=src python3 -m fpl_optimizer.schedule $MORNING
+
+  advice:
+    needs: decide
+    if: needs.decide.outputs.mode != 'skip'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: state
+          path: state
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: .cache/vaastav
+          key: vaastav-${{ hashFiles('config/settings.json') }}
+          restore-keys: vaastav-
+      - run: pip install -e .
+      - name: Backtest (shown on the page)
+        run: python -m fpl_optimizer.gate --out results/backtest.json
+      - name: Plan and render
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python -m fpl_optimizer run --mode ${{ needs.decide.outputs.mode }} --site site
+      - name: Save advice snapshot to the state branch
+        working-directory: state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add history
+          if git diff --cached --quiet; then echo "No snapshot change"; exit 0; fi
+          git commit -m "Advice snapshot (${{ needs.decide.outputs.mode }})"
+          git push
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: advice
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
