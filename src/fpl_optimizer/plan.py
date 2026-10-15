@@ -206,7 +206,11 @@ def serialise(data, settings, now, horizon, xp, best, alts, chip_gws, chip_hold)
             fx = fixtures[(fixtures["gw"] == g) & ((fixtures["team_h"] == e["team"]) | (fixtures["team_a"] == e["team"]))]
             opp.append(
                 [
-                    {"opp": teams[r.team_a] if r.team_h == e["team"] else teams[r.team_h].lower(), "fdr": int(r.diff_h if r.team_h == e["team"] else r.diff_a)}
+                    {
+                        "opp": teams[r.team_a] if r.team_h == e["team"] else teams[r.team_h],
+                        "home": bool(r.team_h == e["team"]),
+                        "fdr": int(r.diff_h if r.team_h == e["team"] else r.diff_a),
+                    }
                     for r in fx.itertuples()
                 ]
             )

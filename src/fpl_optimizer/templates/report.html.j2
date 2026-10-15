@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FPL-råd GW{{ advice.gw }}</title>
+<meta name="robots" content="noindex">
+<style>
+:root {
+  --accent: #FF8200; --accent-2: #6434C7; --bg: #f6f6f4; --card: #ffffff; --text: #1a1a1a;
+  --muted: #666; --line: #e4e4e0; --good: #1b8a4b; --bad: #c0392b; --chip: #fff3e6;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141414; --card: #1f1f1f; --text: #f0f0f0; --muted: #a8a8a8; --line: #333; --chip: #3a2810; --good: #4cc27d; --bad: #ff7b6b; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.45 Aptos, "Segoe UI", system-ui, -apple-system, sans-serif; }
+main { max-width: 720px; margin: 0 auto; padding: 16px; }
+header { border-bottom: 4px solid var(--accent); padding-bottom: 8px; margin-bottom: 16px; }
+h1 { font-size: 1.6rem; margin: 0 0 4px; font-weight: 600; }
+h2 { font-size: 1.2rem; color: var(--accent); margin: 28px 0 8px; font-weight: 600; }
+h3 { font-size: 1rem; margin: 0 0 6px; }
+.muted { color: var(--muted); font-size: .9rem; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin: 10px 0; }
+.hero { border-left: 6px solid var(--accent); }
+.big { font-size: 1.25rem; font-weight: 600; }
+.move { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; padding: 6px 0; border-top: 1px solid var(--line); }
+.move:first-child { border-top: 0; }
+.out { color: var(--bad); } .in { color: var(--good); }
+.pill { display: inline-block; background: var(--chip); color: var(--text); border-radius: 999px; padding: 2px 10px; font-size: .85rem; margin: 2px 4px 2px 0; }
+.pill.c { background: var(--accent); color: #fff; font-weight: 600; }
+.pill.v { background: var(--accent-2); color: #fff; font-weight: 600; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.pos { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; margin-top: 8px; }
+.flag { color: var(--bad); font-size: .8rem; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 10px; }
+.kpi { background: var(--bg); border-radius: 8px; padding: 8px 10px; }
+.kpi b { display: block; font-size: 1.2rem; }
+details summary { cursor: pointer; color: var(--accent-2); margin-top: 8px; }
+footer { margin: 32px 0 16px; color: var(--muted); font-size: .85rem; }
+a { color: var(--accent-2); }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>FPL-råd for GW{{ advice.gw }}</h1>
+  <div class="muted">{{ advice.entry.name }} · Frist {{ deadline }} · Oppdatert {{ generated }}</div>
+</header>
+
+<section class="card hero">
+  <h3>Dette bør du gjøre</h3>
+  {% if rec_week.chip %}<p class="big">Bruk {{ rec_week.chip }}</p>{% endif %}
+  {% if rec_week.moves %}
+    {% for m in rec_week.moves %}
+    <div class="move"><span class="out">Ut: {{ m.out.name }} ({{ m.out.team }}, {{ m.out.sell_price | n if m.out.sell_price else m.out.price | n }}m)</span>
+      <span>→</span>
+      <span class="in">Inn: {{ m["in"].name }} ({{ m["in"].team }}, {{ m["in"].price | n }}m)</span>
+      <span class="muted">{{ m.gain | signed }} poeng over {{ n_weeks }} runder</span></div>
+    {% endfor %}
+    {% if rec_week.hits %}<p><b>Koster {{ 4 * rec_week.hits }} minuspoeng.</b></p>{% endif %}
+  {% else %}
+    <p class="big">Ingen bytter denne runden</p>
+  {% endif %}
+  <p>{{ rec_reason }}</p>
+  <p><span class="pill c">Kaptein: {{ lineup.captain.name }}</span> <span class="pill v">Visekaptein: {{ lineup.vice.name }}</span></p>
+  <div class="kpis">
+    <div class="kpi"><span class="muted">Forventede poeng GW{{ advice.gw }}</span><b>{{ rec.xp_next | n }}</b></div>
+    <div class="kpi"><span class="muted">Forventet over {{ n_weeks }} runder</span><b>{{ rec.xp_horizon | n }}</b></div>
+    <div class="kpi"><span class="muted">I banken / gratis bytter</span><b>{{ advice.state.bank | n }}m / {{ advice.state.free_transfers }}</b></div>
+  </div>
+  {% if advice.state.pending %}
+  <p class="muted">Allerede gjort før fristen (registrert fra chat): {% for t in advice.state.pending %}{{ t.out_name }} → {{ t.in_name }}{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3>Startellever og benk</h3>
+  {% for g in lineup.groups %}
+    <div class="pos">{{ g.label }}</div>
+    <table>
+    {% for p in g.players %}
+      <tr><td>{{ p.name }} {% if p.role == "C" %}<span class="pill c">C</span>{% elif p.role == "V" %}<span class="pill v">V</span>{% endif %}
+        {% if p.flag %}<span class="flag">{{ p.flag }}</span>{% endif %}<br><span class="muted">{{ p.team }} · {{ p.fixtures }}</span></td>
+        <td class="num">{{ p.xp | n }}</td></tr>
+    {% endfor %}
+    </table>
+  {% endfor %}
+  <div class="pos">Benk (i denne rekkefølgen)</div>
+  <table>
+  {% for p in lineup.bench %}
+    <tr><td>{% if loop.first %}Keeper{% else %}{{ loop.index0 }}.{% endif %} {{ p.name }} {% if p.flag %}<span class="flag">{{ p.flag }}</span>{% endif %}<br><span class="muted">{{ p.team }} · {{ p.fixtures }}</span></td><td class="num">{{ p.xp | n }}</td></tr>
+  {% endfor %}
+  </table>
+  <p class="muted">Tallene er forventede poeng neste runde (h = hjemme, b = borte). Laget, benkrekkefølgen og kapteinen er valgt bare ut fra neste runde.</p>
+</section>
+
+<h2>Alternativer</h2>
+{% for a in alts %}
+<section class="card">
+  <h3>{{ a.title }}</h3>
+  {% if a.week.chip %}<p>Bruk {{ a.week.chip }}</p>{% endif %}
+  {% for m in a.week.moves %}
+    <div class="move"><span class="out">Ut: {{ m.out.name }}</span> <span>→</span> <span class="in">Inn: {{ m["in"].name }}</span> <span class="muted">{{ m.gain | signed }} over {{ n_weeks }} runder</span></div>
+  {% endfor %}
+  {% if not a.week.moves and not a.week.chip %}<p>Ingen bytter nå.</p>{% endif %}
+  <p>{{ a.reason }}</p>
+  <div class="kpis">
+    <div class="kpi"><span class="muted">GW{{ advice.gw }}</span><b>{{ a.plan.xp_next | n }}</b></div>
+    <div class="kpi"><span class="muted">{{ n_weeks }} runder</span><b>{{ a.plan.xp_horizon | n }}</b></div>
+    <div class="kpi"><span class="muted">Kaptein</span><b>{{ a.lineup.captain.name }}</b></div>
+  </div>
+</section>
+{% endfor %}
+
+<h2>Skader og tvil</h2>
+<section class="card">
+  {% if flags %}
+  <table>
+    {% for f in flags %}<tr><td><b>{{ f.name }}</b> ({{ f.team }})<br><span class="muted">{{ f.news }}</span></td><td class="num">{{ f.status }}{% if f.chance is not none %}<br>{{ f.chance }} %{% endif %}</td></tr>{% endfor %}
+  </table>
+  {% else %}<p>Ingen i troppen er meldt skadet eller usikker.</p>{% endif %}
+  <p class="muted">Har du hørt noe FPL ikke har fått med seg (skade, rolle)? Si det til Claude i chatten, så blir det tatt med.</p>
+</section>
+
+<h2>Chips</h2>
+<section class="card">
+  <table>
+    <tr><th>Chip</th><th>Periode</th><th>Status</th></tr>
+    {% for c in chips %}<tr><td>{{ c.label }}</td><td>{{ c.window }}</td><td>{{ c.status }}</td></tr>{% endfor %}
+  </table>
+  <p class="muted">En chip foreslås bare når den gir mer nå enn vi venter å få av den senere i perioden. Ubrukte chips forsvinner når perioden er over.{% if next_chip_set %} Et nytt sett med alle fire chips kommer fra GW{{ next_chip_set }}.{% endif %}</p>
+</section>
+
+<h2>Plan for de neste rundene</h2>
+<section class="card">
+  <table>
+    <tr><th>Runde</th><th>Plan</th><th class="num">Forventet</th></tr>
+    {% for w in later %}
+    <tr><td>GW{{ w.gw }}</td><td>
+      {% if w.chip %}<b>{{ w.chip }}</b>. {% endif %}
+      {% for m in w.moves %}{{ m.out.name }} → {{ m["in"].name if m["in"] else "?" }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% if not w.moves and not w.chip %}Spar byttet{% endif %}
+      {% if w.hits %} (−{{ 4 * w.hits }}){% endif %}
+      <br><span class="muted">{{ w.free_transfers }} gratis bytte{{ "r" if w.free_transfers != 1 }} tilgjengelig</span></td>
+      <td class="num">{{ w.xp | n }}</td></tr>
+    {% endfor %}
+  </table>
+  <p class="muted">Bare en skisse: planen regnes ut på nytt hver dag med ferske tall.</p>
+</section>
+
+<h2>Ukens fasit</h2>
+<section class="card">
+  <table>
+    <tr><th>Runde</th><th class="num">Rådet ga</th><th class="num">Du fikk</th><th class="num">Snitt</th><th>Fulgt?</th></tr>
+    {% for r in scorecard %}
+    <tr><td>GW{{ r.gw }}{% if not r.finished %} <span class="muted">(pågår)</span>{% endif %}</td>
+      <td class="num">{% if r.advice_pts is not none %}{{ r.advice_pts }}<br><span class="muted">ventet {{ r.advice_xp | n }}</span>{% else %}–{% endif %}</td>
+      <td class="num">{{ r.you }}</td><td class="num">{{ r.average if r.average is not none else "–" }}</td>
+      <td>{{ r.followed or "–" }}</td></tr>
+    {% endfor %}
+  </table>
+  <p class="muted">«Rådet ga» er poengene startelleveren i rådet faktisk fikk (uten automatiske innbyttere, minus eventuelle minuspoeng). Runder før verktøyet var i drift har bare dine poeng og snittet.</p>
+</section>
+
+<h2>Om tallene</h2>
+<section class="card">
+  <p>Rådene bygger nå på {{ source }}. Vår egen modell tas først i bruk når den slår både FPL sin «form» og grunnmodellen på en hel tidligere sesong.</p>
+  {% if backtest %}
+  <p class="muted">Test på sesongen {{ backtest.season }}, runde {{ backtest.gws[0] }}–{{ backtest.gws[1] }}: hver metode spår hver runde bare med data fra før fristen.</p>
+  <table>
+    <tr><th></th>{% for c in backtest.cols %}<th class="num">{{ c }}</th>{% endfor %}</tr>
+    {% for r in backtest.rows %}<tr><td>{{ r.label }}</td>{% for v in r.vals %}<td class="num">{{ "%.2f" | format(v) | replace(".", ",") }}</td>{% endfor %}</tr>{% endfor %}
+  </table>
+  {% endif %}
+  <details><summary>Hvordan planen lages</summary>
+    <p>Verktøyet regner ut forventede poeng for alle spillere de neste {{ n_weeks }} rundene, og finner den beste kombinasjonen av bytter, kaptein og chips innenfor reglene (budsjett, maks tre fra samme lag, 1 gratis bytte per runde, opptil 5 spart).
+    Et bytte må gi mer enn verdien av å spare gratisbyttet. Et minuspoeng-bytte må gi minst 6 forventede poeng (4 + 2 i sikkerhetsmargin), fordi tallene er usikre.</p>
+  </details>
+</section>
+
+<footer>
+  Verktøyet anbefaler, du bestemmer. Data fra FPL sitt åpne API, sist lest {{ generated }}. <a href="{{ repo_url }}">Kildekode</a>.
+</footer>
+</main>
+</body>
+</html>

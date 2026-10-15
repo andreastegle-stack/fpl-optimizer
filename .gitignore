@@ -226,3 +226,6 @@ __marimo__/
 # Local caches and build output
 .cache/
 /site/
+/results/
+/history/
+/state/
