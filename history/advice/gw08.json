@@ -1,0 +1,2730 @@
+{
+ "generated_at": "2026-10-18T06:27:42+00:00",
+ "gw": 8,
+ "deadline": "2026-10-23T17:30:00Z",
+ "horizon": [
+  8,
+  9,
+  10,
+  11,
+  12,
+  13
+ ],
+ "projection_source": "baseline",
+ "entry": {
+  "id": 5843001,
+  "name": "Suveren"
+ },
+ "state": {
+  "last_deadline": 7,
+  "squad": [
+   109,
+   4,
+   112,
+   204,
+   542,
+   124,
+   12,
+   368,
+   165,
+   411,
+   346,
+   572,
+   488,
+   423,
+   88
+  ],
+  "bank": 2.0,
+  "free_transfers": 1,
+  "pending": [],
+  "pending_hit_cost": 0,
+  "ignored_pending": [
+   {
+    "event": 7,
+    "out": 497,
+    "out_name": "Dubravka",
+    "in": 572,
+    "in_name": "Tzolakis",
+    "recorded": "2026-10-15"
+   }
+  ]
+ },
+ "chips": [
+  {
+   "name": "wildcard",
+   "label": "Wildcard",
+   "start": 2,
+   "stop": 19,
+   "used": null,
+   "allowed_now": true,
+   "hold_value": 25.0
+  },
+  {
+   "name": "wildcard",
+   "label": "Wildcard",
+   "start": 20,
+   "stop": 38,
+   "used": null,
+   "allowed_now": false,
+   "hold_value": null
+  },
+  {
+   "name": "freehit",
+   "label": "Free Hit",
+   "start": 2,
+   "stop": 19,
+   "used": null,
+   "allowed_now": false,
+   "hold_value": 0.0
+  },
+  {
+   "name": "bboost",
+   "label": "Bench Boost",
+   "start": 1,
+   "stop": 19,
+   "used": null,
+   "allowed_now": true,
+   "hold_value": 8.3
+  },
+  {
+   "name": "3xc",
+   "label": "Triple Captain",
+   "start": 1,
+   "stop": 19,
+   "used": 7,
+   "allowed_now": false,
+   "hold_value": 0.0
+  },
+  {
+   "name": "freehit",
+   "label": "Free Hit",
+   "start": 20,
+   "stop": 38,
+   "used": null,
+   "allowed_now": false,
+   "hold_value": null
+  },
+  {
+   "name": "bboost",
+   "label": "Bench Boost",
+   "start": 20,
+   "stop": 38,
+   "used": null,
+   "allowed_now": false,
+   "hold_value": null
+  },
+  {
+   "name": "3xc",
+   "label": "Triple Captain",
+   "start": 20,
+   "stop": 38,
+   "used": null,
+   "allowed_now": false,
+   "hold_value": null
+  }
+ ],
+ "recommended": {
+  "label": "recommended",
+  "objective": 267.64,
+  "xp_next": 53.28,
+  "xp_horizon": 348.33,
+  "weeks": [
+   {
+    "gw": 8,
+    "buys": [
+     388
+    ],
+    "sells": [
+     423
+    ],
+    "chip": null,
+    "squad": [
+     4,
+     12,
+     88,
+     109,
+     112,
+     124,
+     165,
+     204,
+     346,
+     368,
+     388,
+     411,
+     488,
+     542,
+     572
+    ],
+    "lineup": [
+     572,
+     388,
+     4,
+     112,
+     204,
+     12,
+     124,
+     542,
+     411,
+     165,
+     346
+    ],
+    "bench": [
+     109,
+     88,
+     488,
+     368
+    ],
+    "captain": 411,
+    "vice": 165,
+    "hits": 0,
+    "free_transfers": 1,
+    "bank": 3,
+    "xp": 53.28
+   },
+   {
+    "gw": 9,
+    "buys": [
+     236
+    ],
+    "sells": [
+     368
+    ],
+    "chip": null,
+    "squad": [
+     4,
+     12,
+     88,
+     109,
+     112,
+     124,
+     165,
+     204,
+     236,
+     346,
+     388,
+     411,
+     488,
+     542,
+     572
+    ],
+    "lineup": [
+     572,
+     388,
+     4,
+     112,
+     236,
+     12,
+     124,
+     542,
+     411,
+     165,
+     346
+    ],
+    "bench": [
+     109,
+     204,
+     88,
+     488
+    ],
+    "captain": 411,
+    "vice": 388,
+    "hits": 0,
+    "free_transfers": 1,
+    "bank": 5,
+    "xp": 54.4
+   },
+   {
+    "gw": 10,
+    "buys": [],
+    "sells": [],
+    "chip": null,
+    "squad": [
+     4,
+     12,
+     88,
+     109,
+     112,
+     124,
+     165,
+     204,
+     236,
+     346,
+     388,
+     411,
+     488,
+     542,
+     572
+    ],
+    "lineup": [
+     572,
+     388,
+     4,
+     112,
+     236,
+     12,
+     124,
+     542,
+     411,
+     165,
+     346
+    ],
+    "bench": [
+     109,
+     204,
+     88,
+     488
+    ],
+    "captain": 411,
+    "vice": 236,
+    "hits": 0,
+    "free_transfers": 1,
+    "bank": 5,
+    "xp": 55.72
+   },
+   {
+    "gw": 11,
+    "buys": [
+     40,
+     229
+    ],
+    "sells": [
+     12,
+     88
+    ],
+    "chip": null,
+    "squad": [
+     4,
+     40,
+     109,
+     112,
+     124,
+     165,
+     204,
+     229,
+     236,
+     346,
+     388,
+     411,
+     488,
+     542,
+     572
+    ],
+    "lineup": [
+     572,
+     388,
+     229,
+     4,
+     112,
+     236,
+     40,
+     124,
+     542,
+     411,
+     165
+    ],
+    "bench": [
+     109,
+     346,
+     204,
+     488
+    ],
+    "captain": 411,
+    "vice": 388,
+    "hits": 0,
+    "free_transfers": 2,
+    "bank": 4,
+    "xp": 58.89
+   },
+   {
+    "gw": 12,
+    "buys": [
+     47
+    ],
+    "sells": [
+     488
+    ],
+    "chip": "bboost",
+    "squad": [
+     4,
+     40,
+     47,
+     109,
+     112,
+     124,
+     165,
+     204,
+     229,
+     236,
+     346,
+     388,
+     411,
+     542,
+     572
+    ],
+    "lineup": [
+     572,
+     229,
+     388,
+     4,
+     40,
+     236,
+     124,
+     47,
+     411,
+     165,
+     346
+    ],
+    "bench": [
+     109,
+     542,
+     112,
+     204
+    ],
+    "captain": 411,
+    "vice": 40,
+    "hits": 0,
+    "free_transfers": 1,
+    "bank": 2,
+    "xp": 67.62
+   },
+   {
+    "gw": 13,
+    "buys": [],
+    "sells": [],
+    "chip": null,
+    "squad": [
+     4,
+     40,
+     47,
+     109,
+     112,
+     124,
+     165,
+     204,
+     229,
+     236,
+     346,
+     388,
+     411,
+     542,
+     572
+    ],
+    "lineup": [
+     572,
+     229,
+     388,
+     4,
+     112,
+     40,
+     236,
+     124,
+     47,
+     411,
+     165
+    ],
+    "bench": [
+     109,
+     542,
+     346,
+     204
+    ],
+    "captain": 411,
+    "vice": 40,
+    "hits": 0,
+    "free_transfers": 1,
+    "bank": 2,
+    "xp": 58.42
+   }
+  ]
+ },
+ "alternatives": [
+  {
+   "label": "roll",
+   "objective": 265.68,
+   "xp_next": 51.05,
+   "xp_horizon": 346.53,
+   "weeks": [
+    {
+     "gw": 8,
+     "buys": [],
+     "sells": [],
+     "chip": null,
+     "squad": [
+      4,
+      12,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      346,
+      368,
+      411,
+      423,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      4,
+      112,
+      204,
+      88,
+      12,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      423,
+      488,
+      368
+     ],
+     "captain": 411,
+     "vice": 165,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 20,
+     "xp": 51.05
+    },
+    {
+     "gw": 9,
+     "buys": [
+      229,
+      236
+     ],
+     "sells": [
+      368,
+      423
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      12,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      4,
+      112,
+      236,
+      12,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      204,
+      88,
+      488
+     ],
+     "captain": 411,
+     "vice": 229,
+     "hits": 0,
+     "free_transfers": 2,
+     "bank": 3,
+     "xp": 54.44
+    },
+    {
+     "gw": 10,
+     "buys": [
+      40
+     ],
+     "sells": [
+      12
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      4,
+      112,
+      236,
+      40,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      204,
+      88,
+      488
+     ],
+     "captain": 411,
+     "vice": 229,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 19,
+     "xp": 56.11
+    },
+    {
+     "gw": 11,
+     "buys": [
+      388
+     ],
+     "sells": [
+      88
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      388,
+      229,
+      4,
+      112,
+      236,
+      40,
+      124,
+      542,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      346,
+      204,
+      488
+     ],
+     "captain": 411,
+     "vice": 388,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 4,
+     "xp": 58.89
+    },
+    {
+     "gw": 12,
+     "buys": [
+      47
+     ],
+     "sells": [
+      488
+     ],
+     "chip": "bboost",
+     "squad": [
+      4,
+      40,
+      47,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      40,
+      236,
+      124,
+      47,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      542,
+      112,
+      204
+     ],
+     "captain": 411,
+     "vice": 40,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 2,
+     "xp": 67.62
+    },
+    {
+     "gw": 13,
+     "buys": [],
+     "sells": [],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      47,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      112,
+      40,
+      236,
+      124,
+      47,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      542,
+      346,
+      204
+     ],
+     "captain": 411,
+     "vice": 40,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 2,
+     "xp": 58.42
+    }
+   ]
+  },
+  {
+   "label": "other_transfer",
+   "objective": 267.44,
+   "xp_next": 52.66,
+   "xp_horizon": 348.09,
+   "weeks": [
+    {
+     "gw": 8,
+     "buys": [
+      236
+     ],
+     "sells": [
+      368
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      12,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      236,
+      346,
+      411,
+      423,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      4,
+      112,
+      204,
+      12,
+      236,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      88,
+      423,
+      488
+     ],
+     "captain": 411,
+     "vice": 165,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 22,
+     "xp": 52.66
+    },
+    {
+     "gw": 9,
+     "buys": [
+      229
+     ],
+     "sells": [
+      423
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      12,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      4,
+      112,
+      236,
+      12,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      204,
+      88,
+      488
+     ],
+     "captain": 411,
+     "vice": 229,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 3,
+     "xp": 54.44
+    },
+    {
+     "gw": 10,
+     "buys": [],
+     "sells": [],
+     "chip": null,
+     "squad": [
+      4,
+      12,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      4,
+      112,
+      236,
+      12,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      204,
+      88,
+      488
+     ],
+     "captain": 411,
+     "vice": 229,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 3,
+     "xp": 56.06
+    },
+    {
+     "gw": 11,
+     "buys": [
+      40,
+      388
+     ],
+     "sells": [
+      12,
+      88
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      388,
+      229,
+      4,
+      112,
+      236,
+      40,
+      124,
+      542,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      346,
+      204,
+      488
+     ],
+     "captain": 411,
+     "vice": 388,
+     "hits": 0,
+     "free_transfers": 2,
+     "bank": 4,
+     "xp": 58.89
+    },
+    {
+     "gw": 12,
+     "buys": [
+      47
+     ],
+     "sells": [
+      488
+     ],
+     "chip": "bboost",
+     "squad": [
+      4,
+      40,
+      47,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      40,
+      236,
+      124,
+      47,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      542,
+      112,
+      204
+     ],
+     "captain": 411,
+     "vice": 40,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 2,
+     "xp": 67.62
+    },
+    {
+     "gw": 13,
+     "buys": [],
+     "sells": [],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      47,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      112,
+      40,
+      236,
+      124,
+      47,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      542,
+      346,
+      204
+     ],
+     "captain": 411,
+     "vice": 40,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 2,
+     "xp": 58.42
+    }
+   ]
+  },
+  {
+   "label": "hit",
+   "objective": 266.44,
+   "xp_next": 50.55,
+   "xp_horizon": 350.02,
+   "weeks": [
+    {
+     "gw": 8,
+     "buys": [
+      236,
+      388
+     ],
+     "sells": [
+      368,
+      423
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      12,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      236,
+      346,
+      388,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      388,
+      4,
+      112,
+      12,
+      236,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      204,
+      88,
+      488
+     ],
+     "captain": 411,
+     "vice": 165,
+     "hits": 1,
+     "free_transfers": 1,
+     "bank": 5,
+     "xp": 50.55
+    },
+    {
+     "gw": 9,
+     "buys": [
+      40
+     ],
+     "sells": [
+      12
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      88,
+      109,
+      112,
+      124,
+      165,
+      204,
+      236,
+      346,
+      388,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      388,
+      4,
+      112,
+      236,
+      40,
+      124,
+      542,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      204,
+      88,
+      488
+     ],
+     "captain": 411,
+     "vice": 388,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 21,
+     "xp": 54.74
+    },
+    {
+     "gw": 10,
+     "buys": [
+      229
+     ],
+     "sells": [
+      88
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      488,
+      542,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      112,
+      236,
+      40,
+      124,
+      411,
+      165,
+      346
+     ],
+     "bench": [
+      109,
+      542,
+      204,
+      488
+     ],
+     "captain": 411,
+     "vice": 229,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 4,
+     "xp": 57.96
+    },
+    {
+     "gw": 11,
+     "buys": [
+      41
+     ],
+     "sells": [
+      542
+     ],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      41,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      488,
+      572
+     ],
+     "lineup": [
+      572,
+      388,
+      229,
+      4,
+      112,
+      236,
+      40,
+      124,
+      41,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      346,
+      204,
+      488
+     ],
+     "captain": 411,
+     "vice": 388,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 2,
+     "xp": 59.58
+    },
+    {
+     "gw": 12,
+     "buys": [
+      47
+     ],
+     "sells": [
+      488
+     ],
+     "chip": "bboost",
+     "squad": [
+      4,
+      40,
+      41,
+      47,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      40,
+      236,
+      124,
+      41,
+      47,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      346,
+      112,
+      204
+     ],
+     "captain": 411,
+     "vice": 40,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 0,
+     "xp": 68.33
+    },
+    {
+     "gw": 13,
+     "buys": [],
+     "sells": [],
+     "chip": null,
+     "squad": [
+      4,
+      40,
+      41,
+      47,
+      109,
+      112,
+      124,
+      165,
+      204,
+      229,
+      236,
+      346,
+      388,
+      411,
+      572
+     ],
+     "lineup": [
+      572,
+      229,
+      388,
+      4,
+      40,
+      236,
+      124,
+      41,
+      47,
+      411,
+      165
+     ],
+     "bench": [
+      109,
+      112,
+      346,
+      204
+     ],
+     "captain": 411,
+     "vice": 40,
+     "hits": 0,
+     "free_transfers": 1,
+     "bank": 0,
+     "xp": 58.86
+    }
+   ]
+  }
+ ],
+ "players": {
+  "4": {
+   "name": "Gabriel",
+   "team": "ARS",
+   "pos": "DEF",
+   "price": 7.9,
+   "sell_price": 7.9,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 1.0,
+   "xp": {
+    "8": 4.54,
+    "9": 4.25,
+    "10": 4.84,
+    "11": 4.54,
+    "12": 4.25,
+    "13": 4.54
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "EVE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "LIV",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "10": [
+     {
+      "opp": "HUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "11": [
+     {
+      "opp": "NEW",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "MCI",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "13": [
+     {
+      "opp": "BRE",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "12": {
+   "name": "Saka",
+   "team": "ARS",
+   "pos": "MID",
+   "price": 9.6,
+   "sell_price": 9.5,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 1.3,
+   "xp": {
+    "8": 4.42,
+    "9": 4.13,
+    "10": 4.7,
+    "11": 4.42,
+    "12": 4.13,
+    "13": 4.42
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "EVE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "LIV",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "10": [
+     {
+      "opp": "HUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "11": [
+     {
+      "opp": "NEW",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "MCI",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "13": [
+     {
+      "opp": "BRE",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "40": {
+   "name": "Rogers",
+   "team": "CHE",
+   "pos": "MID",
+   "price": 7.9,
+   "sell_price": null,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 4.3,
+   "xp": {
+    "8": 5.03,
+    "9": 4.48,
+    "10": 4.75,
+    "11": 4.75,
+    "12": 4.75,
+    "13": 5.03
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "TOT",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "9": [
+     {
+      "opp": "MUN",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "10": [
+     {
+      "opp": "SUN",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "LEE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "NFO",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "CRY",
+      "home": true,
+      "fdr": 2
+     }
+    ]
+   }
+  },
+  "41": {
+   "name": "Buendía",
+   "team": "AVL",
+   "pos": "MID",
+   "price": 5.9,
+   "sell_price": null,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 6.3,
+   "xp": {
+    "8": 3.73,
+    "9": 4.11,
+    "10": 3.73,
+    "11": 3.92,
+    "12": 4.11,
+    "13": 3.92
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "MCI",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "9": [
+     {
+      "opp": "FUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "10": [
+     {
+      "opp": "MUN",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "11": [
+     {
+      "opp": "SUN",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "IPS",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "13": [
+     {
+      "opp": "EVE",
+      "home": true,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "47": {
+   "name": "Kamara",
+   "team": "AVL",
+   "pos": "MID",
+   "price": 5.0,
+   "sell_price": null,
+   "status": "a",
+   "chance": 100,
+   "news": "",
+   "form": 5.0,
+   "xp": {
+    "8": 3.54,
+    "9": 3.88,
+    "10": 3.54,
+    "11": 3.71,
+    "12": 3.88,
+    "13": 3.71
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "MCI",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "9": [
+     {
+      "opp": "FUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "10": [
+     {
+      "opp": "MUN",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "11": [
+     {
+      "opp": "SUN",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "IPS",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "13": [
+     {
+      "opp": "EVE",
+      "home": true,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "88": {
+   "name": "Kayode",
+   "team": "BRE",
+   "pos": "DEF",
+   "price": 4.6,
+   "sell_price": 4.5,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 2.3,
+   "xp": {
+    "8": 2.69,
+    "9": 2.59,
+    "10": 2.49,
+    "11": 2.59,
+    "12": 2.49,
+    "13": 2.49
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "HUL",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "9": [
+     {
+      "opp": "NFO",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "BHA",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "11": [
+     {
+      "opp": "EVE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "MUN",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "13": [
+     {
+      "opp": "ARS",
+      "home": true,
+      "fdr": 4
+     }
+    ]
+   }
+  },
+  "109": {
+   "name": "Verbruggen",
+   "team": "BHA",
+   "pos": "GK",
+   "price": 4.6,
+   "sell_price": 4.5,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 5.0,
+   "xp": {
+    "8": 2.95,
+    "9": 2.8,
+    "10": 3.1,
+    "11": 3.25,
+    "12": 3.1,
+    "13": 3.1
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "LIV",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "9": [
+     {
+      "opp": "MCI",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "10": [
+     {
+      "opp": "BRE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "HUL",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "12": [
+     {
+      "opp": "NEW",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "BOU",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "112": {
+   "name": "Van Hecke",
+   "team": "TOT",
+   "pos": "DEF",
+   "price": 4.9,
+   "sell_price": 4.9,
+   "status": "a",
+   "chance": 100,
+   "news": "",
+   "form": 3.0,
+   "xp": {
+    "8": 3.14,
+    "9": 3.48,
+    "10": 3.31,
+    "11": 3.48,
+    "12": 3.31,
+    "13": 3.48
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "CHE",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "9": [
+     {
+      "opp": "CRY",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "10": [
+     {
+      "opp": "LEE",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "IPS",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "12": [
+     {
+      "opp": "SUN",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "FUL",
+      "home": true,
+      "fdr": 2
+     }
+    ]
+   }
+  },
+  "124": {
+   "name": "Groß",
+   "team": "BHA",
+   "pos": "MID",
+   "price": 6.1,
+   "sell_price": 5.9,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 6.7,
+   "xp": {
+    "8": 3.94,
+    "9": 3.68,
+    "10": 4.19,
+    "11": 4.45,
+    "12": 4.19,
+    "13": 4.19
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "LIV",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "9": [
+     {
+      "opp": "MCI",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "10": [
+     {
+      "opp": "BRE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "HUL",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "12": [
+     {
+      "opp": "NEW",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "BOU",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "165": {
+   "name": "João Pedro",
+   "team": "CHE",
+   "pos": "FWD",
+   "price": 7.8,
+   "sell_price": 7.6,
+   "status": "a",
+   "chance": 100,
+   "news": "",
+   "form": 4.7,
+   "xp": {
+    "8": 4.93,
+    "9": 4.32,
+    "10": 4.63,
+    "11": 4.63,
+    "12": 4.63,
+    "13": 4.93
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "TOT",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "9": [
+     {
+      "opp": "MUN",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "10": [
+     {
+      "opp": "SUN",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "LEE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "NFO",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "CRY",
+      "home": true,
+      "fdr": 2
+     }
+    ]
+   }
+  },
+  "204": {
+   "name": "Mitchell",
+   "team": "CRY",
+   "pos": "DEF",
+   "price": 4.5,
+   "sell_price": 4.5,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 3.7,
+   "xp": {
+    "8": 3.02,
+    "9": 3.02,
+    "10": 2.88,
+    "11": 3.17,
+    "12": 3.17,
+    "13": 2.88
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "NEW",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "TOT",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "LIV",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "11": [
+     {
+      "opp": "COV",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "12": [
+     {
+      "opp": "HUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "13": [
+     {
+      "opp": "CHE",
+      "home": false,
+      "fdr": 4
+     }
+    ]
+   }
+  },
+  "229": {
+   "name": "Tarkowski",
+   "team": "EVE",
+   "pos": "DEF",
+   "price": 6.2,
+   "sell_price": null,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 5.7,
+   "xp": {
+    "8": 4.37,
+    "9": 4.96,
+    "10": 5.25,
+    "11": 4.96,
+    "12": 4.66,
+    "13": 4.96
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "ARS",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "9": [
+     {
+      "opp": "NEW",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "COV",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "11": [
+     {
+      "opp": "BRE",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "LIV",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "13": [
+     {
+      "opp": "AVL",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "236": {
+   "name": "Dewsbury-Hall",
+   "team": "EVE",
+   "pos": "MID",
+   "price": 6.6,
+   "sell_price": null,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 6.0,
+   "xp": {
+    "8": 4.3,
+    "9": 4.88,
+    "10": 5.16,
+    "11": 4.88,
+    "12": 4.59,
+    "13": 4.88
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "ARS",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "9": [
+     {
+      "opp": "NEW",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "COV",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "11": [
+     {
+      "opp": "BRE",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "LIV",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "13": [
+     {
+      "opp": "AVL",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "346": {
+   "name": "Calvert-Lewin",
+   "team": "LEE",
+   "pos": "FWD",
+   "price": 6.0,
+   "sell_price": 6.0,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 1.3,
+   "xp": {
+    "8": 3.35,
+    "9": 3.35,
+    "10": 3.53,
+    "11": 3.18,
+    "12": 3.53,
+    "13": 3.0
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "SUN",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "BOU",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "TOT",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "11": [
+     {
+      "opp": "CHE",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "12": [
+     {
+      "opp": "COV",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "13": [
+     {
+      "opp": "MCI",
+      "home": false,
+      "fdr": 5
+     }
+    ]
+   }
+  },
+  "368": {
+   "name": "Szoboszlai",
+   "team": "LIV",
+   "pos": "MID",
+   "price": 6.8,
+   "sell_price": 6.8,
+   "status": "i",
+   "chance": 0,
+   "news": "Hamstring injury - Unknown return date",
+   "form": 1.0,
+   "xp": {
+    "8": 0.0,
+    "9": 0.91,
+    "10": 1.91,
+    "11": 2.72,
+    "12": 2.86,
+    "13": 2.86
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "BHA",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "ARS",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "10": [
+     {
+      "opp": "CRY",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "MUN",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "12": [
+     {
+      "opp": "EVE",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "SUN",
+      "home": true,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "388": {
+   "name": "Guéhi",
+   "team": "MCI",
+   "pos": "DEF",
+   "price": 6.0,
+   "sell_price": null,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 3.7,
+   "xp": {
+    "8": 4.92,
+    "9": 4.92,
+    "10": 4.92,
+    "11": 5.21,
+    "12": 4.33,
+    "13": 4.92
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "AVL",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "BHA",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "NFO",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "FUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "12": [
+     {
+      "opp": "ARS",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "13": [
+     {
+      "opp": "LEE",
+      "home": true,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "411": {
+   "name": "Haaland",
+   "team": "MCI",
+   "pos": "FWD",
+   "price": 15.7,
+   "sell_price": 15.6,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 8.3,
+   "xp": {
+    "8": 6.88,
+    "9": 6.88,
+    "10": 6.88,
+    "11": 7.37,
+    "12": 5.9,
+    "13": 6.88
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "AVL",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "BHA",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "NFO",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "FUL",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "12": [
+     {
+      "opp": "ARS",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "13": [
+     {
+      "opp": "LEE",
+      "home": true,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "423": {
+   "name": "Shaw",
+   "team": "MUN",
+   "pos": "DEF",
+   "price": 4.3,
+   "sell_price": 4.3,
+   "status": "d",
+   "chance": 75,
+   "news": "Unspecified injury - 75% chance of playing",
+   "form": 1.7,
+   "xp": {
+    "8": 1.36,
+    "9": 1.46,
+    "10": 1.66,
+    "11": 1.75,
+    "12": 1.81,
+    "13": 1.81
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "BOU",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "CHE",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "10": [
+     {
+      "opp": "AVL",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "11": [
+     {
+      "opp": "LIV",
+      "home": false,
+      "fdr": 4
+     }
+    ],
+    "12": [
+     {
+      "opp": "BRE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "NEW",
+      "home": false,
+      "fdr": 3
+     }
+    ]
+   }
+  },
+  "488": {
+   "name": "I.Sangaré",
+   "team": "NFO",
+   "pos": "MID",
+   "price": 4.8,
+   "sell_price": 4.8,
+   "status": "a",
+   "chance": 100,
+   "news": "",
+   "form": 0.7,
+   "xp": {
+    "8": 0.76,
+    "9": 0.74,
+    "10": 0.73,
+    "11": 0.74,
+    "12": 0.73,
+    "13": 0.76
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "IPS",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "9": [
+     {
+      "opp": "BRE",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "10": [
+     {
+      "opp": "MCI",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "11": [
+     {
+      "opp": "BOU",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "CHE",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "13": [
+     {
+      "opp": "HUL",
+      "home": false,
+      "fdr": 2
+     }
+    ]
+   }
+  },
+  "542": {
+   "name": "E.Le Fée",
+   "team": "SUN",
+   "pos": "MID",
+   "price": 5.7,
+   "sell_price": 5.7,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 2.3,
+   "xp": {
+    "8": 3.23,
+    "9": 3.4,
+    "10": 3.07,
+    "11": 3.23,
+    "12": 3.4,
+    "13": 3.07
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "LEE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "COV",
+      "home": false,
+      "fdr": 2
+     }
+    ],
+    "10": [
+     {
+      "opp": "CHE",
+      "home": true,
+      "fdr": 4
+     }
+    ],
+    "11": [
+     {
+      "opp": "AVL",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "TOT",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "13": [
+     {
+      "opp": "LIV",
+      "home": false,
+      "fdr": 4
+     }
+    ]
+   }
+  },
+  "572": {
+   "name": "Tzolakis",
+   "team": "HUL",
+   "pos": "GK",
+   "price": 4.7,
+   "sell_price": 4.7,
+   "status": "a",
+   "chance": null,
+   "news": "",
+   "form": 3.7,
+   "xp": {
+    "8": 4.04,
+    "9": 4.24,
+    "10": 3.63,
+    "11": 4.04,
+    "12": 4.04,
+    "13": 4.04
+   },
+   "fixtures": {
+    "8": [
+     {
+      "opp": "BRE",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "9": [
+     {
+      "opp": "IPS",
+      "home": true,
+      "fdr": 2
+     }
+    ],
+    "10": [
+     {
+      "opp": "ARS",
+      "home": false,
+      "fdr": 5
+     }
+    ],
+    "11": [
+     {
+      "opp": "BHA",
+      "home": true,
+      "fdr": 3
+     }
+    ],
+    "12": [
+     {
+      "opp": "CRY",
+      "home": false,
+      "fdr": 3
+     }
+    ],
+    "13": [
+     {
+      "opp": "NFO",
+      "home": true,
+      "fdr": 3
+     }
+    ]
+   }
+  }
+ },
+ "flags": [
+  {
+   "element": 368,
+   "status": "i",
+   "chance": 0,
+   "news": "Hamstring injury - Unknown return date"
+  },
+  {
+   "element": 423,
+   "status": "d",
+   "chance": 75,
+   "news": "Unspecified injury - 75% chance of playing"
+  }
+ ],
+ "mode": "morning",
+ "deadline_run": false,
+ "emailed": false
+}
