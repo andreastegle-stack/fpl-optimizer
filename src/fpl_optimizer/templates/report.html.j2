@@ -51,6 +51,66 @@ a { color: var(--accent-2); }
   <div class="muted">{{ advice.entry.name }} · Frist {{ deadline }} · Oppdatert {{ generated }}</div>
 </header>
 
+{% if live %}
+<section class="card">
+  <h3>GW{{ live.gw }} pågår</h3>
+  <p>Runden er ikke ferdigspilt ennå: {{ live.points }} poeng så langt{% if live.average %} (snitt {{ live.average }}){% endif %}. Gjennomgangen kommer morgenen etter at FPL har gjort runden ferdig.</p>
+</section>
+{% endif %}
+{% if review %}
+{% set r = review.result %}
+<h2 style="margin-top:8px">Forrige runde: GW{{ review.gw }}</h2>
+<section class="card">
+  <div class="kpis">
+    <div class="kpi"><span class="muted">Dine poeng</span><b>{{ r.points }}</b></div>
+    <div class="kpi"><span class="muted">Snitt / høyeste</span><b>{{ r.average }} / {{ r.highest }}</b></div>
+    <div class="kpi"><span class="muted">Plass totalt</span><b>{{ r.overall_rank | rank }}</b>{% if r.prev_overall_rank %}<span class="muted">fra {{ r.prev_overall_rank | rank }}</span>{% endif %}</div>
+  </div>
+  <p class="muted">{% if r.chip %}Chip: {{ r.chip }}. {% endif %}{% if r.hits %}Minuspoeng: −{{ 4 * r.hits }}. {% endif %}{% if r.top10k_total %}Topp 10 000 totalt ligger rundt {{ r.top10k_total }} poeng (du har {{ r.total }}).{% endif %}</p>
+  {% if not review.has_projections %}<p class="muted">Verktøyet hadde ikke laget et råd før denne fristen, så modellens forventninger mangler for runden.</p>{% endif %}
+
+  <h3>Valgene dine</h3>
+  {% set c = review.captain %}
+  <p><b>Kaptein:</b> {{ c.name }} fikk {{ c.pts }} poeng ({{ c.total }} {% if c.chip %}med Triple Captain{% else %}som kaptein{% endif %}){% if c.xp is not none %}, ventet {{ c.xp | n }}{% endif %}.
+    {% if c.lost_vs_best > 0 %}Beste i laget var {{ c.best_name }} med {{ c.best_pts }} ({{ c.lost_vs_best }} poeng mer som kaptein).{% else %}Det var det beste valget i laget.{% endif %}
+    {% if c.model_pick and c.model_pick != c.name %}Modellens toppvalg var {{ c.model_pick }} (ventet {{ c.model_pick_xp | n }}, fikk {{ c.model_pick_pts }}).{% elif c.model_pick %}Samme som modellens toppvalg.{% endif %}</p>
+  {% for t in review.transfers %}
+  <p><b>Bytte:</b> {{ t.out }} → {{ t["in"] }}: {{ t.pts_in }} mot {{ t.pts_out }} poeng denne runden{% if t.exp_gain_horizon is not none %}; ventet {{ t.exp_gain_horizon | signed }} over seks runder{% endif %}.</p>
+  {% endfor %}
+  {% set b = review.bench %}
+  {% if not b.chip %}
+  <p><b>Benken:</b> {{ b.points_left }} poeng ble stående på benken.
+    {% if b.model_xi_gain is defined %}
+      {% if b.model_changes %}Modellens startellever ({% for m in b.model_changes %}{{ m["in"] }} inn for {{ m.out }}{% if not loop.last %}, {% endif %}{% endfor %}) ville gitt {% if b.model_xi_gain > 0 %}{{ b.model_xi_gain }} poeng mer{% elif b.model_xi_gain < 0 %}{{ -b.model_xi_gain }} poeng mindre{% else %}like mange poeng{% endif %}.{% else %}Startelleveren var den samme som modellens.{% endif %}
+    {% endif %}
+    {% if b.hindsight_gain > 0 %}Med fasit i hånd kunne beste ellever gitt {{ b.hindsight_gain }} poeng mer, men det kunne ingen vite på forhånd.{% endif %}</p>
+  {% endif %}
+  {% if review.advice %}
+  <p><b>Rådet:</b> startelleveren i rådet ville gitt {{ review.advice.points }} poeng (ventet {{ review.advice.xp | n }}){% if review.advice.points < r.points %}, du fikk {{ r.points - review.advice.points }} mer{% elif review.advice.points > r.points %}, {{ review.advice.points - r.points }} mer enn du fikk{% endif %}.{% if r.chip and not review.advice.chip %} Rådet brukte ingen chip denne runden.{% endif %}</p>
+  {% endif %}
+
+  {% if review.lessons %}
+  <h3>Å ta med videre</h3>
+  {% for l in review.lessons %}<p>{{ l }}</p>{% endfor %}
+  {% endif %}
+
+  {% if review.has_projections %}
+  <details><summary>Modellen mot virkeligheten, spiller for spiller</summary>
+  <table>
+    <tr><th>Spiller</th><th class="num">Ventet</th><th class="num">Fikk</th></tr>
+    {% for p in review.players %}
+    <tr><td>{{ p.name }}{% if p.captain %} <span class="pill c">C</span>{% endif %}
+      {% if p.cause %}<br><span class="muted">{{ p.cause }} · {% if p.kind == "modell" %}modellen bommet{% elif p.kind == "uflaks" %}uflaks{% else %}flaks{% endif %}</span>{% endif %}</td>
+      <td class="num">{{ p.xp | n if p.xp is not none else "–" }}</td><td class="num">{{ p.pts }}</td></tr>
+    {% endfor %}
+  </table>
+  <p class="muted">«Uflaks» og «flaks» er variasjon modellen ikke kan forutse (sjanser som ikke ble mål, mål på få sjanser). «Modellen bommet» er når spilletid eller rolle ble en annen enn ventet.</p>
+  </details>
+  {% endif %}
+</section>
+<h2>Neste runde</h2>
+{% endif %}
+
 <section class="card hero">
   <h3>Dette bør du gjøre</h3>
   {% if rec_week.chip %}<p class="big">Bruk {{ rec_week.chip }}</p>{% endif %}

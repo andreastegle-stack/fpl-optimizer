@@ -79,6 +79,9 @@ class FplApi:
     def event_live(self, event: int) -> dict:
         return self.get(f"event/{event}/live")
 
+    def classic_standings(self, league: int, page: int) -> dict:
+        return self._fetch(f"{BASE_URL}/leagues-classic/{league}/standings/?page_standings={page}")
+
     def element_summaries(self, element_ids: list[int], workers: int = 8) -> dict[int, dict]:
         with ThreadPoolExecutor(max_workers=workers) as pool:
             results = pool.map(self.element_summary, element_ids)

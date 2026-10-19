@@ -24,6 +24,14 @@ ALT_TITLES = {
 STATUS_NO = {"d": "Usikker", "i": "Skadet", "s": "Utestengt", "u": "Ikke tilgjengelig", "n": "Ikke tilgjengelig"}
 
 
+def _rank(n: int | None) -> str:
+    if n is None:
+        return "–"
+    if n >= 1_000_000:
+        return f"{n / 1e6:.2f} mill".replace(".", ",")
+    return f"{n:,}".replace(",", " ")
+
+
 def no_datetime(value: str | datetime) -> str:
     dt = datetime.fromisoformat(value.replace("Z", "+00:00")) if isinstance(value, str) else value
     dt = dt.astimezone(OSLO)
@@ -113,9 +121,18 @@ def lineup_rows(advice: dict, week: dict) -> dict:
     return {"groups": groups, "bench": bench, "captain": row(week["captain"]), "vice": row(week["vice"])}
 
 
-def render(advice: dict, scorecard: list[dict], backtest: dict | None, out_dir: Path, repo_url: str) -> Path:
+def render(
+    advice: dict,
+    scorecard: list[dict],
+    backtest: dict | None,
+    out_dir: Path,
+    repo_url: str,
+    last_review: dict | None = None,
+    live: dict | None = None,
+) -> Path:
     env = Environment(loader=PackageLoader("fpl_optimizer", "templates"), autoescape=select_autoescape(["html"]))
     env.filters["n"] = fmt
+    env.filters["rank"] = _rank
     env.filters["signed"] = lambda x: fmt(x, True)
     rec = advice["recommended"]
     first = rec["weeks"][0]
@@ -167,6 +184,8 @@ def render(advice: dict, scorecard: list[dict], backtest: dict | None, out_dir: 
         }
 
     context = {
+        "review": last_review,
+        "live": live,
         "advice": advice,
         "deadline": no_datetime(advice["deadline"]),
         "generated": no_datetime(advice["generated_at"]),

@@ -20,6 +20,7 @@ are in [CLAUDE.md](CLAUDE.md).
 | Availability | `availability.py` | FPL injury flags and "expected back" dates, plus `data/overrides.json`. |
 | Planner | `optimizer.py`, `plan.py` | MILP on [HiGHS](https://highs.dev), adapted from [open-fpl-solver](https://github.com/solioanalytics/open-fpl-solver) (Apache-2.0, see [NOTICE](NOTICE)): 6-gameweek horizon, rolled free transfers with diminishing value, hits only with a safety margin, chip timing with opportunity costs. XI, bench order and captain use next gameweek's projections only. |
 | Report | `report.py`, `templates/` | Static page: what to do, 2–3 alternatives with expected points and reasons, injury flags, chip status, plan for the next weeks, weekly scorecard, backtest table. |
+| Review | `review.py` | Once a gameweek is final: result and rank movement, each decision (transfers, captain, bench) judged against what the model expected before the deadline, model vs reality per player (variance vs the model being wrong), and at most two lessons backed by the data. Stored per gameweek on the `state` branch; a short summary goes into the deadline email. |
 | Scorecard | `scorecard.py` | Advice (saved on the `state` branch) vs what the manager did vs the gameweek average. |
 | Email | `notify.py` | Gmail SMTP from Actions; credentials only as Actions secrets. |
 
