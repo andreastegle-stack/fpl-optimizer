@@ -1,0 +1,187 @@
+{
+ "gw": 6,
+ "final": true,
+ "has_projections": false,
+ "result": {
+  "points": 57,
+  "gross": 57,
+  "hits": 0,
+  "average": 58,
+  "highest": 131,
+  "gw_rank": 6004152,
+  "overall_rank": 4948512,
+  "prev_overall_rank": 4844249,
+  "total": 353,
+  "top10k_total": 546,
+  "chip": null,
+  "bench_points": 1
+ },
+ "transfers": [
+  {
+   "in": "Saka",
+   "out": "B.Fernandes",
+   "pts_in": 2,
+   "pts_out": 1,
+   "xp_in": null,
+   "xp_out": null,
+   "exp_gain_horizon": null
+  },
+  {
+   "in": "Groß",
+   "out": "Tavernier",
+   "pts_in": 6,
+   "pts_out": 1,
+   "xp_in": null,
+   "xp_out": null,
+   "exp_gain_horizon": null
+  }
+ ],
+ "hit_cost": 0,
+ "captain": {
+  "name": "Haaland",
+  "chip": false,
+  "pts": 6,
+  "total": 12,
+  "xp": null,
+  "best_name": "João Pedro",
+  "best_pts": 12,
+  "lost_vs_best": 6,
+  "model_pick": null,
+  "model_pick_xp": null,
+  "model_pick_pts": null,
+  "vs_model": null
+ },
+ "bench": {
+  "points_left": 1,
+  "chip": false,
+  "hindsight_gain": -3
+ },
+ "players": [
+  {
+   "name": "Verbruggen",
+   "pos": "GK",
+   "xp": null,
+   "pts": 9,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Mitchell",
+   "pos": "DEF",
+   "xp": null,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Shaw",
+   "pos": "DEF",
+   "xp": null,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Gabriel",
+   "pos": "DEF",
+   "xp": null,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": null,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Groß",
+   "pos": "MID",
+   "xp": null,
+   "pts": 6,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Saka",
+   "pos": "MID",
+   "xp": null,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "E.Le Fée",
+   "pos": "MID",
+   "xp": null,
+   "pts": 2,
+   "minutes": 80,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Haaland",
+   "pos": "FWD",
+   "xp": null,
+   "pts": 6,
+   "minutes": 79,
+   "captain": true,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "xp": null,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "João Pedro",
+   "pos": "FWD",
+   "xp": null,
+   "pts": 12,
+   "minutes": 71,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": null,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  }
+ ],
+ "advice": null,
+ "lessons": [],
+ "summary": [
+  "GW6: 57 poeng (snitt 58), plass 4,84 mill → 4,95 mill.",
+  "Kaptein Haaland: 12 poeng; beste i laget var João Pedro med 12."
+ ]
+}
