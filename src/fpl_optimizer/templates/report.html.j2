@@ -53,8 +53,13 @@ a { color: var(--accent-2); }
 
 {% if live %}
 <section class="card">
+  {% if live.all_played %}
+  <h3>GW{{ live.gw }}: venter på at FPL låser poengene</h3>
+  <p>Alle kampene er spilt, men FPL har ikke låst poengene ennå. Bonuspoeng og automatiske innbyttere kan fortsatt endre seg. Foreløpig {{ live.points }} poeng{% if live.average %} (snitt {{ live.average }}){% endif %}. Gjennomgangen kommer morgenen etter at FPL har låst runden.</p>
+  {% else %}
   <h3>GW{{ live.gw }} pågår</h3>
-  <p>Runden er ikke ferdigspilt ennå: {{ live.points }} poeng så langt{% if live.average %} (snitt {{ live.average }}){% endif %}. Gjennomgangen kommer morgenen etter at FPL har gjort runden ferdig.</p>
+  <p>Det gjenstår kamper i runden: {{ live.points }} poeng så langt{% if live.average %} (snitt {{ live.average }}){% endif %}. Gjennomgangen kommer morgenen etter at FPL har låst runden.</p>
+  {% endif %}
 </section>
 {% endif %}
 {% if review %}
