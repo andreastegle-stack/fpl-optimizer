@@ -17,7 +17,7 @@ SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
 
 
-def compose(advice: dict, url: str) -> EmailMessage:
+def compose(advice: dict, url: str, last_review: dict | None = None) -> EmailMessage:
     players = {str(k): v for k, v in advice["players"].items()}
     name = lambda p: players[str(p)]["name"]
     rec = advice["recommended"]
@@ -41,6 +41,10 @@ def compose(advice: dict, url: str) -> EmailMessage:
         f"Forventede poeng: {rec['xp_next']:.1f} denne runden.",
         "",
     ]
+    if last_review and last_review.get("summary"):
+        lines.append("Forrige runde:")
+        lines += [f"- {s}" for s in last_review["summary"]]
+        lines.append("")
     if advice["flags"]:
         lines.append("Skader/tvil i troppen: " + ", ".join(f"{name(f['element'])} ({f['news'] or f['status']})" for f in advice["flags"]) + ".")
         lines.append("")
@@ -49,7 +53,7 @@ def compose(advice: dict, url: str) -> EmailMessage:
     return msg
 
 
-def send(advice: dict, url: str) -> bool:
+def send(advice: dict, url: str, last_review: dict | None = None) -> bool:
     """Send the deadline email. Returns False (and sends nothing) if secrets are missing."""
     user = os.environ.get("SMTP_USER")
     password = os.environ.get("SMTP_PASSWORD")
@@ -57,7 +61,7 @@ def send(advice: dict, url: str) -> bool:
     if not (user and password and to):
         print("Email skipped: SMTP_USER / SMTP_PASSWORD secrets are not set.")
         return False
-    msg = compose(advice, url)
+    msg = compose(advice, url, last_review)
     msg["From"] = user
     msg["To"] = to
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=ssl.create_default_context()) as smtp:

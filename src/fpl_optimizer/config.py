@@ -13,6 +13,8 @@ OVERRIDES_PATH = ROOT / "data" / "overrides.json"
 # Advice snapshots (for the scorecard). In Actions they live on the ``state`` branch,
 # checked out separately, so bot commits never touch main.
 ADVICE_DIR = Path(os.environ.get("FPL_ADVICE_DIR", ROOT / "history" / "advice"))
+# Reviews of finished gameweeks, stored next to the advice snapshots.
+REVIEW_DIR = ADVICE_DIR.parent / "review"
 CACHE_DIR = ROOT / ".cache"
 
 

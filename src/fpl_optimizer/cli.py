@@ -16,17 +16,36 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import notify, report, scorecard
+from . import notify, report, review, scorecard
 from .api import FplApi
-from .config import ADVICE_DIR, ROOT, load_settings
+from .config import ADVICE_DIR, REVIEW_DIR, ROOT, load_settings
 from .plan import make_advice
 
 REPO_URL = "https://github.com/andreastegle-stack/fpl-optimizer"
 
 
+def latest_review(api: FplApi, entry_id: int, bootstrap: dict) -> tuple[dict | None, dict | None]:
+    """The review of the last final gameweek (built and stored once), and the live
+    status of a gameweek that has started but is not final yet."""
+    reviews = review.load_reviews(REVIEW_DIR)
+    gw = review.final_gameweek(bootstrap["events"])
+    latest = None
+    if gw is not None:
+        path = REVIEW_DIR / f"gw{gw:02d}.json"
+        if path.exists():
+            latest = json.loads(path.read_text(encoding="utf-8"))
+        else:
+            advice = scorecard.load_snapshot(ADVICE_DIR, gw)
+            latest = review.build(api, entry_id, gw, bootstrap, advice, [r for r in reviews if r["gw"] < gw])
+            REVIEW_DIR.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(latest, indent=1, ensure_ascii=False), encoding="utf-8")
+    return latest, review.live_status(api, entry_id, bootstrap)
+
+
 def run(mode: str, site: Path, backtest_path: Path) -> dict:
     settings = load_settings()
     api = FplApi()
+    last_review, live = latest_review(api, settings["entry_id"], api.bootstrap())
     advice = json.loads(json.dumps(make_advice(api, settings, datetime.now(timezone.utc)), default=str))
     advice["mode"] = mode
 
@@ -36,13 +55,13 @@ def run(mode: str, site: Path, backtest_path: Path) -> dict:
         advice["deadline_run"] = mode == "deadline"
         advice["emailed"] = previous.get("emailed", False)
         if mode == "deadline" and not advice["emailed"]:
-            advice["emailed"] = notify.send(advice, settings["report_url"])
+            advice["emailed"] = notify.send(advice, settings["report_url"], last_review)
         ADVICE_DIR.mkdir(parents=True, exist_ok=True)
         snapshot.write_text(json.dumps(advice, indent=1, ensure_ascii=False), encoding="utf-8")
 
     cards = scorecard.build(api, settings["entry_id"], api.bootstrap(), ADVICE_DIR)
     backtest = json.loads(backtest_path.read_text(encoding="utf-8")) if backtest_path.exists() else None
-    report.render(advice, cards, backtest, site, REPO_URL)
+    report.render(advice, cards, backtest, site, REPO_URL, last_review, live)
     (site / "advice.json").write_text(json.dumps(advice, indent=1, ensure_ascii=False), encoding="utf-8")
     if backtest_path.exists():
         shutil.copy(backtest_path, site / "backtest.json")
