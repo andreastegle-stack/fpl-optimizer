@@ -324,7 +324,11 @@ def build(api, entry_id: int, gw: int, bootstrap: dict, advice: dict | None, his
 
 
 def live_status(api, entry_id: int, bootstrap: dict) -> dict | None:
-    """Points so far for a gameweek that has started but is not final yet."""
+    """Points so far for a gameweek that has started but is not final yet.
+
+    ``all_played`` tells the page whether matches remain, or every match is played
+    and FPL has just not locked the points yet (bonus and automatic substitutions
+    can still change)."""
     current = next((e for e in bootstrap["events"] if e.get("is_current")), None)
     if not current or (current.get("finished") and current.get("data_checked")):
         return None
@@ -332,4 +336,12 @@ def live_status(api, entry_id: int, bootstrap: dict) -> dict | None:
         hist = api.picks(entry_id, current["id"])["entry_history"]
     except FileNotFoundError:
         return None
-    return {"gw": current["id"], "final": False, "points": hist["points"] - hist["event_transfers_cost"], "average": current.get("average_entry_score")}
+    fixtures = [f for f in api.fixtures() if f["event"] == current["id"]]
+    all_played = bool(fixtures) and all(f.get("finished") or f.get("finished_provisional") for f in fixtures)
+    return {
+        "gw": current["id"],
+        "final": False,
+        "all_played": all_played,
+        "points": hist["points"] - hist["event_transfers_cost"],
+        "average": current.get("average_entry_score"),
+    }

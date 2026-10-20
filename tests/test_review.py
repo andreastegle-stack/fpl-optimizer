@@ -128,3 +128,27 @@ def test_summary_for_email_is_short():
     assert 2 <= len(r["summary"]) <= 3
     assert r["summary"][0].startswith("GW9: 60 poeng (snitt 50), plass 1,00 mill → 900 000")
     assert "Kaptein P13: 4 poeng" in r["summary"][1]
+
+
+class _FakeApi:
+    def __init__(self, fixtures):
+        self._fixtures = fixtures
+
+    def picks(self, entry_id, gw):
+        return {"entry_history": {"points": 81, "event_transfers_cost": 0}}
+
+    def fixtures(self):
+        return self._fixtures
+
+
+def test_live_status_tells_played_from_locked():
+    from fpl_optimizer.review import live_status
+
+    bootstrap = {"events": [{"id": 7, "is_current": True, "finished": False, "data_checked": False, "average_entry_score": 56}]}
+    played = [{"event": 7, "finished": True}, {"event": 7, "finished": False, "finished_provisional": True}, {"event": 8, "finished": False}]
+    s = live_status(_FakeApi(played), 1, bootstrap)
+    assert s["all_played"] is True and s["points"] == 81
+    s = live_status(_FakeApi(played + [{"event": 7, "finished": False}]), 1, bootstrap)
+    assert s["all_played"] is False
+    bootstrap["events"][0] |= {"finished": True, "data_checked": True}
+    assert live_status(_FakeApi(played), 1, bootstrap) is None
