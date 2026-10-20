@@ -15,6 +15,11 @@ Objective per gameweek ``w`` (discounted by ``decay ** (w - first)``):
     + V(free transfers next week) - V(free transfers this week)
     - chip hold value (points we expect to get from the chip later in its window)
 
+Chips are handled per instance, keyed by ``(name, window start)``: the season has two
+sets of Wildcard, Free Hit, Bench Boost and Triple Captain (GW1-19 and GW20-38), so a
+horizon that crosses GW19/20 holds two instances of each chip, each playable at most
+once inside its own window and each with its own hold value.
+
 ``V`` (``ft_values``) is the value of holding k free transfers. It is what makes the
 planner value rolling a transfer: using one has to gain more than the drop in ``V``
 or it is better to keep it. ``V`` grows with diminishing steps, so banking a fourth
@@ -45,6 +50,9 @@ SQUAD_SELECT = {1: 2, 2: 5, 3: 5, 4: 3}
 PLAY_MIN = {1: 1, 2: 3, 3: 2, 4: 1}
 PLAY_MAX = {1: 1, 2: 5, 3: 5, 4: 3}
 MAX_PER_TEAM = 3
+CHIPS = ("wildcard", "freehit", "bboost", "3xc")
+
+ChipKey = tuple[str, int]  # (chip name, first gameweek of its window)
 
 
 @dataclass
@@ -61,10 +69,10 @@ class Problem:
     bank: int
     free_transfers: int
     max_ft: int = 5
-    # chip name -> gameweeks (within gws) it may be played in
-    chip_gws: dict[str, list[int]] = field(default_factory=dict)
-    # chip name -> expected points given up by playing it now rather than later
-    chip_hold: dict[str, float] = field(default_factory=dict)
+    # chip instance -> gameweeks (within gws) it may be played in
+    chip_gws: dict[ChipKey, list[int]] = field(default_factory=dict)
+    # chip instance -> expected points given up by playing it now rather than later
+    chip_hold: dict[ChipKey, float] = field(default_factory=dict)
     decay: float = 0.9
     ft_values: tuple[float, ...] = (0.0, 0.0, 1.5, 2.5, 3.2, 3.6)  # value of holding 0..5 FTs
     bench_weight: float = 0.08
@@ -82,7 +90,7 @@ class Constraints:
     min_transfers_first: int | None = None
     exclude_in_sets: list[frozenset[int]] = field(default_factory=list)
     no_chip_first: bool = False
-    chip_first: str | None = None  # force this chip in the first gameweek
+    chip_first: str | None = None  # force this chip (by name, any instance) in the first gameweek
 
 
 @dataclass
@@ -126,15 +134,19 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
     teams = sorted({prob.team[p] for p in players})
     initial = set(prob.squad)
     all_w = [w0 - 1, *gws]
-    allowed = {c: [w for w in gws if w in set(prob.chip_gws.get(c, []))] for c in ("wildcard", "freehit", "bboost", "3xc")}
+    allowed = {k: [w for w in gws if w in set(ws)] for k, ws in prob.chip_gws.items() if k[0] in CHIPS}
     if cons.no_chip_first:
-        allowed = {c: [w for w in ws if w != w0] for c, ws in allowed.items()}
+        allowed = {k: [w for w in ws if w != w0] for k, ws in allowed.items()}
     if cons.transfers_first is not None:
-        allowed["wildcard"] = [w for w in allowed["wildcard"] if w != w0]
-        allowed["freehit"] = [w for w in allowed["freehit"] if w != w0]
-    if cons.chip_first and w0 not in allowed[cons.chip_first]:
+        allowed = {k: [w for w in ws if w != w0 or k[0] not in ("wildcard", "freehit")] for k, ws in allowed.items()}
+    allowed = {k: ws for k, ws in allowed.items() if ws}
+    if cons.chip_first and not any(k[0] == cons.chip_first and w0 in ws for k, ws in allowed.items()):
         return None
-    fh_weeks, tc_weeks = allowed["freehit"], allowed["3xc"]
+
+    def weeks_of(name: str) -> list[int]:
+        return sorted({w for k, ws in allowed.items() if k[0] == name for w in ws})
+
+    fh_weeks, tc_weeks = weeks_of("freehit"), weeks_of("3xc")
 
     h = highspy.Highs()
     h.setOptionValue("output_flag", False)
@@ -154,10 +166,15 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
     tout = binv(players, gws)
     squad_fh = binv(players, fh_weeks)
     use_tc = binv(players, tc_weeks)
-    # Chip indicators exist only in weeks the chip may be played; elsewhere they are 0.
-    chip_vars = {c: {w: (h.addBinary() if w in allowed[c] else 0) for w in gws} for c in ("wildcard", "freehit", "bboost")}
-    chip_vars["3xc"] = {w: (S(use_tc[p, w] for p in players) if w in tc_weeks else 0) for w in gws}
-    wc, fh, bb, tc = (chip_vars[c] for c in ("wildcard", "freehit", "bboost", "3xc"))
+    # One indicator per chip instance and week it may be played in. Per chip name the
+    # instances add up to that chip's indicator for the week (0 where none is allowed).
+    chip_vars = {k: {w: h.addBinary() for w in ws} for k, ws in allowed.items()}
+
+    def played(name: str, w: int):
+        vs = [var[w] for k, var in chip_vars.items() if k[0] == name and w in var]
+        return S(vs) if vs else 0
+
+    wc, fh, bb, tc = ({w: played(c, w) for w in gws} for c in CHIPS)
     itb = {w: h.addVariable(lb=0) for w in all_w}
     ft = {w: h.addIntegral(lb=0, ub=prob.max_ft) for w in [*gws, gws[-1] + 1]}
     ft_state = binv([*gws[1:], gws[-1] + 1], range(prob.max_ft + 1))
@@ -213,6 +230,8 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
                 add(use_tc[p, w] <= captain[p, w])
             add(squad[p, w] == squad[p, w - 1] + tin[p, w] - tout[p, w])
             add(tin[p, w] + tout[p, w] <= 1)
+        if w in tc_weeks:
+            add(S(use_tc[p, w] for p in players) == tc[w])
 
         sold = S(sell[p] * tout[p, w] for p in players)
         bought = S(prob.buy_price[p] * tin[p, w] for p in players)
@@ -243,13 +262,13 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
         add(nxt - raw <= big * (above[w] + below[w]))
         add(raw - nxt <= big * (above[w] + below[w]))
 
-        chips_now = [chip_vars[c][w] for c in chip_vars if w in allowed[c]]
+        chips_now = [var[w] for var in chip_vars.values() if w in var]
         if len(chips_now) > 1:
             add(S(chips_now) <= 1)  # one chip per gameweek
 
-    for c, var in chip_vars.items():
-        if len(allowed[c]) > 1:
-            add(S(var[w] for w in allowed[c]) <= 1)
+    for var in chip_vars.values():
+        if len(var) > 1:
+            add(S(var.values()) <= 1)  # each chip instance at most once, inside its window
 
     # Constraints for alternatives
     if cons.transfers_first is not None:
@@ -260,7 +279,7 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
         if in_set:
             add(S(tin[p, w0] for p in in_set if p in players) <= len(in_set) - 1)
     if cons.chip_first:
-        add(chip_vars[cons.chip_first][w0] == 1)
+        add(played(cons.chip_first, w0) == 1)
 
     terms = []
     for w in gws:
@@ -269,7 +288,7 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
         if w in tc_weeks:
             week = week + S(xp[p, w] * use_tc[p, w] for p in players)
         week = week - (prob.hit_cost + prob.hit_margin) * hits[w] + ft_value[w + 1] - ft_value[w]
-        holds = [prob.chip_hold.get(c, 0.0) * var[w] for c, var in chip_vars.items() if w in allowed[c]]
+        holds = [prob.chip_hold.get(k, 0.0) * var[w] for k, var in chip_vars.items() if w in var]
         if holds:
             week = week - S(holds)
         terms.append(d * week)
@@ -285,9 +304,7 @@ def solve(prob: Problem, cons: Constraints | None = None) -> Solution | None:
     for w in gws:
         played_fh = on(fh[w])
         sq = [p for p in players if on(squad_fh[p, w] if played_fh else squad[p, w])]
-        chip = next((c for c in ("wildcard", "freehit", "bboost") if on(chip_vars[c][w])), None)
-        if w in tc_weeks and any(on(use_tc[p, w]) for p in players):
-            chip = "3xc"
+        chip = next((k[0] for k, var in chip_vars.items() if w in var and on(var[w])), None)
         lineup_ids, bench_ids, cap, vc = next_gw_lineup(sq, prob.xp[w], ptype)
         n_hits = int(round(h.val(hits[w])))
         scoring = lineup_ids + (bench_ids if chip == "bboost" else [])
