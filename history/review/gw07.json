@@ -1,0 +1,187 @@
+{
+ "gw": 7,
+ "final": true,
+ "has_projections": true,
+ "result": {
+  "points": 81,
+  "gross": 81,
+  "hits": 0,
+  "average": 59,
+  "highest": 122,
+  "gw_rank": 506856,
+  "overall_rank": 3513426,
+  "prev_overall_rank": 4948512,
+  "total": 434,
+  "top10k_total": 547,
+  "chip": "Triple Captain",
+  "bench_points": 5
+ },
+ "transfers": [
+  {
+   "in": "Tzolakis",
+   "out": "Dubravka",
+   "pts_in": 3,
+   "pts_out": 0,
+   "xp_in": 4.07,
+   "xp_out": null,
+   "exp_gain_horizon": null
+  }
+ ],
+ "hit_cost": 0,
+ "captain": {
+  "name": "Haaland",
+  "chip": true,
+  "pts": 13,
+  "total": 39,
+  "xp": 7.12,
+  "best_name": "Haaland",
+  "best_pts": 13,
+  "lost_vs_best": 0,
+  "model_pick": "Haaland",
+  "model_pick_xp": 7.12,
+  "model_pick_pts": 13,
+  "vs_model": 0
+ },
+ "bench": {
+  "points_left": 5,
+  "chip": false,
+  "hindsight_gain": 1,
+  "model_xi_gain": -3,
+  "model_xi_expected_gain": 1.7000000000000028,
+  "model_changes": [
+   {
+    "in": "Tzolakis",
+    "out": "Verbruggen"
+   },
+   {
+    "in": "Kayode",
+    "out": "Szoboszlai"
+   }
+  ]
+ },
+ "players": [
+  {
+   "name": "Haaland",
+   "pos": "FWD",
+   "xp": 7.12,
+   "pts": 13,
+   "minutes": 90,
+   "captain": true,
+   "cause": "2 mål/målgivende på xG+xA 1.1",
+   "kind": "flaks"
+  },
+  {
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "xp": 4.01,
+   "pts": 9,
+   "minutes": 90,
+   "captain": false,
+   "cause": "3 bonuspoeng",
+   "kind": "flaks"
+  },
+  {
+   "name": "Mitchell",
+   "pos": "DEF",
+   "xp": 3.63,
+   "pts": 0,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Laget slapp inn 5 mål",
+   "kind": "uflaks"
+  },
+  {
+   "name": "João Pedro",
+   "pos": "FWD",
+   "xp": 4.75,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Saka",
+   "pos": "MID",
+   "xp": 5.55,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Gabriel",
+   "pos": "DEF",
+   "xp": 5.68,
+   "pts": 8,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Verbruggen",
+   "pos": "GK",
+   "xp": 4.06,
+   "pts": 6,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Groß",
+   "pos": "MID",
+   "xp": 5.58,
+   "pts": 5,
+   "minutes": 70,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": 4.35,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Szoboszlai",
+   "pos": "MID",
+   "xp": 0.85,
+   "pts": 1,
+   "minutes": 31,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "E.Le Fée",
+   "pos": "MID",
+   "xp": 4.05,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  }
+ ],
+ "advice": {
+  "points": 65,
+  "xp": 58.46,
+  "captain": "Haaland",
+  "buys": [],
+  "sells": [],
+  "chip": null
+ },
+ "lessons": [],
+ "summary": [
+  "GW7: 81 poeng (snitt 59), plass 4,95 mill → 3,51 mill.",
+  "Kaptein Haaland: 39 poeng med Triple Captain."
+ ]
+}
