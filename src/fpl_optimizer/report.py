@@ -109,7 +109,7 @@ def lineup_rows(advice: dict, week: dict) -> dict:
             "xp": xp,
             "fixtures": ", ".join(f"{f['opp']} ({'h' if f['home'] else 'b'})" for f in fx) or "ingen kamp",
             "role": role,
-            "flag": STATUS_NO.get(info["status"]) if info["status"] != "a" else None,
+            "flag": (STATUS_NO.get(info["status"], "") + (f" ({info['chance']} %)" if info.get("chance") is not None else "")) if info["status"] != "a" else None,
         }
 
     roles = {week["captain"]: "C", week["vice"]: "V"}

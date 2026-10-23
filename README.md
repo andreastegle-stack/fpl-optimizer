@@ -51,10 +51,13 @@ snapshots live on the `state` branch.
 
 ## Schedules
 
-`.github/workflows/advice.yml` runs at 01:30 UTC (after the 00:00 UK price change)
-and checks every 30 minutes whether a deadline is 0.75–3.5 hours away; the first
-check in that window runs the deadline advice and sends the email, once per
-gameweek. Deadlines come from `bootstrap-static`, so nothing is hard-coded.
+`.github/workflows/advice.yml` updates the page every morning at 01:30 UTC (after
+the 00:00 UK price change). The deadline runs do not rely on GitHub's cron, which
+is best effort: any Advice run starts `deadline-timer.yml` when a deadline is less
+than 36 hours away, and the timer sleeps until **2 hours before** the deadline
+(final advice and the email) and **40 minutes before** (fresh injury news; a
+second email only if the advice changed). A half-hourly cron check remains as a
+backup. Deadlines come from `bootstrap-static`, so nothing is hard-coded.
 
 ## Secrets
 

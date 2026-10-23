@@ -17,7 +17,7 @@ SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
 
 
-def compose(advice: dict, url: str, last_review: dict | None = None) -> EmailMessage:
+def compose(advice: dict, url: str, last_review: dict | None = None, changed: bool = False) -> EmailMessage:
     players = {str(k): v for k, v in advice["players"].items()}
     name = lambda p: players[str(p)]["name"]
     rec = advice["recommended"]
@@ -31,10 +31,10 @@ def compose(advice: dict, url: str, last_review: dict | None = None) -> EmailMes
     chip = f", bruk {CHIP_NO[week['chip']]}" if week["chip"] else ""
 
     msg = EmailMessage()
-    msg["Subject"] = f"FPL GW{gw}: {what}{chip}, kaptein {name(week['captain'])}"
+    msg["Subject"] = ("Endret råd – " if changed else "") + f"FPL GW{gw}: {what}{chip}, kaptein {name(week['captain'])}"
     lines = [
         f"FPL-råd for GW{gw} – frist {no_datetime(advice['deadline'])}.",
-        "",
+        *(["Rådet er endret siden forrige e-post, mest sannsynlig på grunn av ny skadeinformasjon.", ""] if changed else [""]),
         f"{what}{chip}.",
         f"Kaptein: {name(week['captain'])}. Visekaptein: {name(week['vice'])}.",
         "Benk: " + ", ".join(name(p) for p in week["bench"]) + ".",
@@ -53,7 +53,7 @@ def compose(advice: dict, url: str, last_review: dict | None = None) -> EmailMes
     return msg
 
 
-def send(advice: dict, url: str, last_review: dict | None = None) -> bool:
+def send(advice: dict, url: str, last_review: dict | None = None, changed: bool = False) -> bool:
     """Send the deadline email. Returns False (and sends nothing) if secrets are missing."""
     user = os.environ.get("SMTP_USER")
     password = os.environ.get("SMTP_PASSWORD")
@@ -61,7 +61,7 @@ def send(advice: dict, url: str, last_review: dict | None = None) -> bool:
     if not (user and password and to):
         print("Email skipped: SMTP_USER / SMTP_PASSWORD secrets are not set.")
         return False
-    msg = compose(advice, url, last_review)
+    msg = compose(advice, url, last_review, changed)
     msg["From"] = user
     msg["To"] = to
     with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=ssl.create_default_context()) as smtp:

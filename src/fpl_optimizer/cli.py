@@ -1,11 +1,12 @@
 """Command line entry point.
 
-    python -m fpl_optimizer run --mode morning|deadline [--site site]
+    python -m fpl_optimizer run --mode morning|deadline|refresh [--site site]
     python -m fpl_optimizer test-email
 
 ``run`` fetches data, plans, renders the report into ``--site`` and saves the
-gameweek's advice snapshot in ``history/advice`` (always on a deadline run, and on a
-morning run only if none exists yet). A deadline run also sends the email once.
+gameweek's advice snapshot in ``history/advice`` (see ``snapshot_policy``). The
+deadline run sends the email; the refresh 40 minutes before the deadline sends a
+second one only if the advice changed.
 """
 
 from __future__ import annotations
@@ -42,6 +43,29 @@ def latest_review(api: FplApi, entry_id: int, bootstrap: dict) -> tuple[dict | N
     return latest, review.live_status(api, entry_id, bootstrap)
 
 
+def signature(advice: dict) -> tuple:
+    """What Andreas acts on in the first week: moves, chip, captaincy and the XI."""
+    w = advice["recommended"]["weeks"][0]
+    return (tuple(sorted(w["buys"])), tuple(sorted(w["sells"])), w["chip"], w["captain"], w["vice"], tuple(sorted(w["lineup"])))
+
+
+def snapshot_policy(mode: str, previous: dict, advice: dict) -> tuple[bool, str | None]:
+    """(save this advice as the gameweek's snapshot?, email to send: None/"advice"/"changed").
+
+    The snapshot is what the scorecard and the review judge, so it should be the
+    latest advice before the deadline: morning runs keep it current until a deadline
+    run has saved the final one. If the deadline run was missed, the refresh sends
+    the normal email instead.
+    """
+    if mode == "morning":
+        return not previous.get("deadline_run"), None
+    if mode == "deadline":
+        return True, None if previous.get("emailed") else "advice"
+    if not previous.get("emailed"):
+        return True, "advice"
+    return True, "changed" if signature(previous) != signature(advice) else None
+
+
 def run(mode: str, site: Path, backtest_path: Path) -> dict:
     settings = load_settings()
     api = FplApi()
@@ -51,11 +75,14 @@ def run(mode: str, site: Path, backtest_path: Path) -> dict:
 
     snapshot = ADVICE_DIR / f"gw{advice['gw']:02d}.json"
     previous = json.loads(snapshot.read_text(encoding="utf-8")) if snapshot.exists() else {}
-    if mode == "deadline" or not previous:
-        advice["deadline_run"] = mode == "deadline"
+    save, email = snapshot_policy(mode, previous, advice)
+    if save:
+        advice["deadline_run"] = mode in ("deadline", "refresh") or previous.get("deadline_run", False)
+        advice["refresh_run"] = mode == "refresh"
         advice["emailed"] = previous.get("emailed", False)
-        if mode == "deadline" and not advice["emailed"]:
-            advice["emailed"] = notify.send(advice, settings["report_url"], last_review)
+        if email:
+            sent = notify.send(advice, settings["report_url"], last_review, changed=email == "changed")
+            advice["emailed"] = advice["emailed"] or sent
         ADVICE_DIR.mkdir(parents=True, exist_ok=True)
         snapshot.write_text(json.dumps(advice, indent=1, ensure_ascii=False), encoding="utf-8")
 
@@ -73,7 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="fpl-optimizer")
     sub = parser.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run", help="plan, render the report and save the snapshot")
-    r.add_argument("--mode", choices=["morning", "deadline"], default="morning")
+    r.add_argument("--mode", choices=["morning", "deadline", "refresh"], default="morning")
     r.add_argument("--site", default=str(ROOT / "site"))
     r.add_argument("--backtest", default=str(ROOT / "results" / "backtest.json"))
     sub.add_parser("test-email", help="send the latest advice as a test email")
