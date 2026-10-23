@@ -1,8 +1,10 @@
 name: Advice
 
-# Every morning after the nightly price change (00:00 UK = 23:00 or 00:00 UTC), and a
-# check every half hour that runs the deadline advice once, about 3 hours before each
-# deadline (deadlines are read from the FPL API, so no dates are hard-coded here).
+# Every morning after the nightly price change (00:00 UK = 23:00 or 00:00 UTC). The
+# deadline runs (2 hours and 40 minutes before each deadline) are started by the
+# deadline timer (deadline-timer.yml), which any run here kicks off when a deadline
+# is near; GitHub's cron is best effort and cannot be relied on for them. The
+# half-hourly cron stays as a backup. Deadlines come from the FPL API.
 on:
   schedule:
     - cron: "30 1 * * *"
@@ -10,15 +12,16 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "morning = update the page; deadline = also save the final advice and send the email"
+        description: "morning = update the page; deadline = save the final advice and send the email; refresh = last update before the deadline, email only if the advice changed"
         type: choice
-        options: [morning, deadline]
+        options: [morning, deadline, refresh]
         default: morning
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  actions: write  # to start the deadline timer
 
 concurrency:
   group: advice
@@ -46,7 +49,13 @@ jobs:
           fi
           MORNING=""
           if [ "${{ github.event.schedule }}" = "30 1 * * *" ]; then MORNING="--morning"; fi
-          PYTHONPATH=src python3 -m fpl_optimizer.schedule $MORNING
+          PYTHONPATH=src python3 -m fpl_optimizer.schedule decide $MORNING
+      - name: Start the deadline timer if a deadline is near
+        # Not from runs the timer itself started (deadline/refresh).
+        if: github.event_name == 'schedule' || inputs.mode == 'morning'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: PYTHONPATH=src python3 -m fpl_optimizer.schedule kick
 
   advice:
     needs: decide

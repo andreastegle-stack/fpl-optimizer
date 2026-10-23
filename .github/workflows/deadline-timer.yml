@@ -1,0 +1,32 @@
+name: Deadline timer
+
+# Sleeps until 2 hours and 40 minutes before the next deadline and starts the Advice
+# workflow at each point (see src/fpl_optimizer/schedule.py). Started by Advice runs
+# when a deadline is less than 36 hours away; a timer with further to go hands over
+# to a fresh one after 5.5 hours (GitHub's job limit is 6). Only one timer runs at a
+# time; a newer request waits and then re-plans from the saved snapshot flags.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write  # to start Advice and the next timer
+
+concurrency:
+  group: deadline-timer
+  cancel-in-progress: false
+
+jobs:
+  timer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      FPL_ADVICE_DIR: state/history/advice
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: state
+          path: state
+      - run: PYTHONPATH=src python3 -m fpl_optimizer.schedule timer
