@@ -1,0 +1,179 @@
+{
+ "gw": 8,
+ "final": true,
+ "has_projections": true,
+ "result": {
+  "points": 54,
+  "gross": 54,
+  "hits": 0,
+  "average": 45,
+  "highest": 120,
+  "gw_rank": 2578039,
+  "overall_rank": 3011673,
+  "prev_overall_rank": 3513426,
+  "total": 488,
+  "top10k_total": 598,
+  "chip": null,
+  "bench_points": 2
+ },
+ "transfers": [
+  {
+   "in": "Calafiori",
+   "out": "Shaw",
+   "pts_in": 1,
+   "pts_out": 0,
+   "xp_in": null,
+   "xp_out": 1.36,
+   "exp_gain_horizon": null
+  }
+ ],
+ "hit_cost": 0,
+ "captain": {
+  "name": "Haaland",
+  "chip": false,
+  "pts": 8,
+  "total": 16,
+  "xp": 6.88,
+  "best_name": "Gabriel",
+  "best_pts": 17,
+  "lost_vs_best": 9,
+  "model_pick": null,
+  "model_pick_xp": null,
+  "model_pick_pts": null,
+  "vs_model": null
+ },
+ "bench": {
+  "points_left": 2,
+  "chip": false,
+  "hindsight_gain": 0
+ },
+ "players": [
+  {
+   "name": "Gabriel",
+   "pos": "DEF",
+   "xp": 4.54,
+   "pts": 17,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Holdt nullen",
+   "kind": "flaks"
+  },
+  {
+   "name": "João Pedro",
+   "pos": "FWD",
+   "xp": 4.93,
+   "pts": 0,
+   "minutes": 0,
+   "captain": false,
+   "cause": "Spilte ikke",
+   "kind": "modell"
+  },
+  {
+   "name": "Groß",
+   "pos": "MID",
+   "xp": 3.94,
+   "pts": 0,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Lite involvert i kampen",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": 3.14,
+   "pts": 7,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Holdt nullen",
+   "kind": "flaks"
+  },
+  {
+   "name": "Mitchell",
+   "pos": "DEF",
+   "xp": 3.02,
+   "pts": 1,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "xp": 3.35,
+   "pts": 2,
+   "minutes": 84,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Kayode",
+   "pos": "DEF",
+   "xp": 2.69,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Haaland",
+   "pos": "FWD",
+   "xp": 6.88,
+   "pts": 8,
+   "minutes": 90,
+   "captain": true,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Tzolakis",
+   "pos": "GK",
+   "xp": 4.04,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "E.Le Fée",
+   "pos": "MID",
+   "xp": 3.23,
+   "pts": 3,
+   "minutes": 78,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Calafiori",
+   "pos": "DEF",
+   "xp": null,
+   "pts": 1,
+   "minutes": 22,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  }
+ ],
+ "advice": {
+  "points": 49,
+  "xp": 53.28,
+  "captain": "Haaland",
+  "buys": [
+   "Guéhi"
+  ],
+  "sells": [
+   "Shaw"
+  ],
+  "chip": null
+ },
+ "lessons": [],
+ "summary": [
+  "GW8: 54 poeng (snitt 45), plass 3,51 mill → 3,01 mill.",
+  "Kaptein Haaland: 16 poeng; beste i laget var Gabriel med 17."
+ ]
+}
