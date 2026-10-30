@@ -66,3 +66,38 @@ def test_availability_injury_and_override():
 def test_expected_back_rolls_into_next_year():
     now = datetime(2026, 11, 20, tzinfo=timezone.utc)
     assert expected_back("Expected back 05 Jan", now).year == 2027
+
+
+def test_components_split_points_by_source():
+    from fpl_optimizer.history import components
+
+    m = pd.DataFrame(
+        [
+            # DEF: 90 min, goal, clean sheet, 10 defensive contributions, 1 bonus -> 2+6+4+2+1 = 15
+            {"element": 1, "minutes": 90, "points": 15, "goals_scored": 1, "assists": 0, "clean_sheets": 1, "goals_conceded": 0, "saves": 0, "penalties_saved": 0, "defensive_contribution": 10},
+            # GK: 90 min, 6 saves, conceded 3 -> 2 + 2 - 1 = 3
+            {"element": 2, "minutes": 90, "points": 3, "goals_scored": 0, "assists": 0, "clean_sheets": 0, "goals_conceded": 3, "saves": 6, "penalties_saved": 0, "defensive_contribution": 0},
+            # MID sub: 20 min, assist -> 1 + 3 = 4
+            {"element": 3, "minutes": 20, "points": 4, "goals_scored": 0, "assists": 1, "clean_sheets": 0, "goals_conceded": 0, "saves": 0, "penalties_saved": 0, "defensive_contribution": 0},
+        ]
+    )
+    c = components(m, pd.Series({1: 2, 2: 1, 3: 3}))
+    assert list(c.loc[0]) == [2, 6, 6, 1]
+    assert list(c.loc[1]) == [2, 0, 1, 0]
+    assert list(c.loc[2]) == [1, 3, 0, 0]
+
+
+def test_team_ratings_are_venue_adjusted_and_shrunk():
+    from fpl_optimizer.projections.model import team_ratings
+
+    kick = pd.Timestamp("2026-09-01T15:00:00Z")
+    rows = [
+        {"fixture": i, "gw": i, "team_h": h, "team_a": a, "diff_h": 3, "diff_a": 3, "kickoff": kick + pd.Timedelta(days=i), "score_h": sh, "score_a": sa}
+        for i, (h, a, sh, sa) in enumerate([(1, 2, 4, 0), (2, 1, 0, 3), (3, 4, 1, 1), (4, 3, 2, 1)], start=1)
+    ]
+    rows.append({"fixture": 9, "gw": 9, "team_h": 1, "team_a": 3, "diff_h": 3, "diff_a": 3, "kickoff": kick + pd.Timedelta(days=30), "score_h": None, "score_a": None})
+    r, mu_h, mu_a = team_ratings(pd.DataFrame(rows), kick + pd.Timedelta(days=10))
+    assert mu_h > mu_a
+    assert r.at[1, "attack"] > 1 > r.at[2, "attack"]
+    assert r.at[1, "defence"] < 1 < r.at[2, "defence"]
+    assert r.at[1, "attack"] < 2  # shrunk towards the league average

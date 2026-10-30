@@ -5,8 +5,10 @@ API or from a past season in the vaastav/Fantasy-Premier-League dataset. That ke
 the backtest honest: a method is scored on exactly the inputs it gets in production.
 
 ``matches``  one row per player per team fixture already played
-             (element, gw, fixture, kickoff, minutes, points, team)
-``fixtures`` one row per fixture (fixture, gw, team_h, team_a, diff_h, diff_a, kickoff)
+             (element, gw, fixture, kickoff, minutes, points, team, opponent, was_home,
+             and the scoring stats in ``STATS``)
+``fixtures`` one row per fixture (fixture, gw, team_h, team_a, diff_h, diff_a, kickoff,
+             score_h, score_a; scores are empty until the match is played)
 ``players``  one row per player (element, element_type, team, web_name, ...)
 """
 
@@ -18,6 +20,30 @@ import pandas as pd
 import requests
 
 POSITION_TYPES = {"GK": 1, "GKP": 1, "DEF": 2, "MID": 3, "FWD": 4}
+STATS = ["goals_scored", "assists", "clean_sheets", "goals_conceded", "saves", "penalties_saved", "defensive_contribution"]
+# 2025/26 onwards scoring (CLAUDE.md); read from game_config where it matters live.
+GOAL_PTS = {1: 10, 2: 6, 3: 5, 4: 4}
+CS_PTS = {1: 4, 2: 4, 3: 1, 4: 0}
+DEFCON_THRESHOLD = {2: 10, 3: 12, 4: 12}
+
+
+def components(m: pd.DataFrame, element_type: pd.Series) -> pd.DataFrame:
+    """Split each match's points into appearance, attacking (goals, assists),
+    defensive (clean sheet, goals conceded, saves, penalty saves, defensive
+    contributions) and the rest (bonus, cards, own goals...)."""
+    t = element_type.reindex(m["element"]).to_numpy()
+    t = pd.Series(t, index=m.index)
+    app = (m["minutes"] >= 60) * 2 + ((m["minutes"] > 0) & (m["minutes"] < 60)) * 1
+    att = m["goals_scored"] * t.map(GOAL_PTS).fillna(0) + m["assists"] * 3
+    gk_def = t.isin([1, 2])
+    defence = (
+        m["clean_sheets"] * t.map(CS_PTS).fillna(0)
+        - gk_def * (m["goals_conceded"] // 2)
+        + (t == 1) * (m["saves"] // 3)
+        + m["penalties_saved"] * 5
+        + 2 * (m["defensive_contribution"] >= t.map(DEFCON_THRESHOLD).fillna(99))
+    )
+    return pd.DataFrame({"app": app, "att": att, "def": defence, "other": m["points"] - app - att - defence}, index=m.index)
 VAASTAV_RAW = "https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data"
 
 
@@ -36,9 +62,10 @@ def live_matches(summaries: dict[int, dict], elements: dict[int, dict]) -> pd.Da
                     "team": None,
                     "opponent": h["opponent_team"],
                     "was_home": h["was_home"],
+                    **{s: h.get(s, 0) or 0 for s in STATS},
                 }
             )
-    df = pd.DataFrame(rows, columns=["element", "gw", "fixture", "kickoff", "minutes", "points", "team", "opponent", "was_home"])
+    df = pd.DataFrame(rows, columns=["element", "gw", "fixture", "kickoff", "minutes", "points", "team", "opponent", "was_home", *STATS])
     df["kickoff"] = pd.to_datetime(df["kickoff"], utc=True)
     df["team"] = df["element"].map(lambda e: elements[e]["team"])
     return df.sort_values(["element", "kickoff"]).reset_index(drop=True)
@@ -55,6 +82,8 @@ def live_fixtures(fixtures: list[dict]) -> pd.DataFrame:
                 "diff_h": f["team_h_difficulty"],
                 "diff_a": f["team_a_difficulty"],
                 "kickoff": f["kickoff_time"],
+                "score_h": f["team_h_score"] if f.get("finished") else None,
+                "score_a": f["team_a_score"] if f.get("finished") else None,
             }
             for f in fixtures
         ]
@@ -113,6 +142,7 @@ def load_season(season_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFr
             "was_home": raw["was_home"].astype(bool),
             "xp": raw["xP"].astype(float),
             "element_type": raw["position"].map(POSITION_TYPES).astype(int),
+            **{s: (raw[s] if s in raw else pd.Series(0, index=raw.index)).fillna(0).astype(int) for s in STATS},
         }
     ).sort_values(["element", "kickoff"]).reset_index(drop=True)
 
@@ -126,6 +156,8 @@ def load_season(season_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFr
             "diff_h": fx["team_h_difficulty"].astype(int),
             "diff_a": fx["team_a_difficulty"].astype(int),
             "kickoff": pd.to_datetime(fx["kickoff_time"], utc=True),
+            "score_h": fx["team_h_score"].astype(float),
+            "score_a": fx["team_a_score"].astype(float),
         }
     )
 
@@ -144,17 +176,22 @@ def load_season(season_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFr
 
 def season_rates(season_dir: Path) -> pd.DataFrame:
     """Per player (by FPL ``code``, stable across seasons): minutes and non-appearance
-    points per 90 over a whole season. Used as the baseline's starting point."""
+    points per 90 over a whole season, in total and split into attacking, defensive
+    and other points. Used as the projections' starting point."""
     season_dir = Path(season_dir)
-    raw = pd.read_csv(season_dir / "merged_gw.csv", usecols=["element", "minutes", "total_points"])
-    app = (raw["minutes"] >= 60) * 2 + ((raw["minutes"] > 0) & (raw["minutes"] < 60)) * 1
-    raw = raw.assign(rest=raw["total_points"] - app)
-    per = raw.groupby("element").agg(prior_minutes=("minutes", "sum"), rest=("rest", "sum"))
+    m, _, _ = load_season(season_dir)
+    comp = components(m, m.groupby("element")["element_type"].last())
+    m = m.assign(rest=m["points"] - comp["app"], att=comp["att"], dfn=comp["def"], oth=comp["other"])
+    per = m.groupby("element").agg(prior_minutes=("minutes", "sum"), rest=("rest", "sum"), att=("att", "sum"), dfn=("dfn", "sum"), oth=("oth", "sum"))
     codes = pd.read_csv(season_dir / "players_raw.csv").set_index("id")["code"]
     per["code"] = codes.reindex(per.index).values
     per = per.dropna(subset=["code"]).astype({"code": int})
-    per["prior_rate90"] = per["rest"] / per["prior_minutes"].clip(lower=1) * 90
-    return per.set_index("code")[["prior_minutes", "prior_rate90"]]
+    per90 = 90 / per["prior_minutes"].clip(lower=1)
+    per["prior_rate90"] = per["rest"] * per90
+    per["prior_att90"] = per["att"] * per90
+    per["prior_def90"] = per["dfn"] * per90
+    per["prior_other90"] = per["oth"] * per90
+    return per.set_index("code")[["prior_minutes", "prior_rate90", "prior_att90", "prior_def90", "prior_other90"]]
 
 
 def with_prior(players: pd.DataFrame, rates: pd.DataFrame | None) -> pd.DataFrame:
@@ -178,8 +215,9 @@ def team_at(matches: pd.DataFrame, before_gw: int) -> pd.Series:
 def player_fixtures(fixtures: pd.DataFrame, teams: pd.Series, gws: list[int]) -> pd.DataFrame:
     """One row per (player, fixture) in ``gws`` with the difficulty from the player's side."""
     fx = fixtures[fixtures["gw"].isin(gws)]
-    home = fx.rename(columns={"team_h": "team", "diff_h": "difficulty"})[["fixture", "gw", "team", "difficulty"]].assign(home=True)
-    away = fx.rename(columns={"team_a": "team", "diff_a": "difficulty"})[["fixture", "gw", "team", "difficulty"]].assign(home=False)
+    cols = ["fixture", "gw", "team", "opponent", "difficulty"]
+    home = fx.rename(columns={"team_h": "team", "team_a": "opponent", "diff_h": "difficulty"})[cols].assign(home=True)
+    away = fx.rename(columns={"team_a": "team", "team_h": "opponent", "diff_a": "difficulty"})[cols].assign(home=False)
     team_fx = pd.concat([home, away], ignore_index=True)
     pt = teams.rename("team").reset_index()
     return pt.merge(team_fx, on="team", how="inner")
