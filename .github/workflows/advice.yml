@@ -36,8 +36,8 @@ jobs:
     outputs:
       mode: ${{ steps.mode.outputs.mode }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           ref: state
           path: state
@@ -63,16 +63,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
         with:
           ref: state
           path: state
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.14"
           cache: pip
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: .cache/vaastav
           key: vaastav-${{ hashFiles('config/settings.json') }}
@@ -95,7 +95,7 @@ jobs:
           if git diff --cached --quiet; then echo "No snapshot change"; exit 0; fi
           git commit -m "Advice snapshot (${{ needs.decide.outputs.mode }})"
           git push
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
@@ -107,4 +107,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

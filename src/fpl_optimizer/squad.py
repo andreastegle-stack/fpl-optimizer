@@ -69,6 +69,11 @@ class ChipInfo:
     def label(self) -> str:
         return CHIP_LABELS.get(self.name, self.name)
 
+    @property
+    def key(self) -> tuple[str, int]:
+        """Identifies this chip instance: the season has two sets of each chip."""
+        return (self.name, self.start_event)
+
 
 @dataclass
 class SquadState:

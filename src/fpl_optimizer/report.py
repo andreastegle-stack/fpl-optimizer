@@ -149,7 +149,11 @@ def render(
 
     gw0 = advice["gw"]
     chips = []
-    planned = {w["chip"]: w["gw"] for w in rec["weeks"] if w["chip"]}
+
+    def planned_gw(c: dict) -> int | None:
+        # Match on the chip's own window: a horizon past GW19 can plan both chip sets.
+        return next((w["gw"] for w in rec["weeks"] if w["chip"] == c["name"] and c["start"] <= w["gw"] <= c["stop"]), None)
+
     current = [c for c in advice["chips"] if c["start"] <= gw0 <= c["stop"] or c["used"] is not None and c["stop"] >= gw0]
     later_set = sorted({c["start"] for c in advice["chips"] if c["start"] > gw0})
     for c in sorted(current, key=lambda c: c["start"]):
@@ -159,8 +163,8 @@ def render(
             status = f"Brukt i GW{c['used']}"
         elif c["start"] > gw0:
             status = f"Ny chip fra GW{c['start']}"
-        elif c["name"] in planned:
-            status = f"Planlagt i GW{planned[c['name']]}" if planned[c["name"]] != gw0 else "Bruk nå"
+        elif (gw := planned_gw(c)) is not None:
+            status = f"Planlagt i GW{gw}" if gw != gw0 else "Bruk nå"
         else:
             status = f"Tilgjengelig til og med GW{c['stop']}"
         chips.append({"label": CHIP_NO.get(c["name"], c["label"]), "window": f"GW{c['start']}–{c['stop']}", "status": status, "hold": c.get("hold_value")})

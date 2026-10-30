@@ -67,6 +67,11 @@ def chip_hold_values(
 ) -> tuple[dict, dict]:
     """Which chips may be played in which horizon weeks, and what playing one now costs.
 
+    Keyed per chip instance, ``(name, window start)``: once the horizon crosses into
+    the second chip set it holds two instances of each chip, each with its own window
+    and hold value. ``xp_all`` must reach the end of every window that starts inside
+    the horizon.
+
     Triple Captain and Bench Boost: the best gain the current squad is projected to get
     from the chip in the rest of its window after the horizon (0 if the window ends
     inside the horizon). Wildcard and Free Hit: fixed values from settings while
@@ -83,20 +88,20 @@ def chip_hold_values(
             weeks = [g for g in weeks if fixture_count.get(g, 0) != 10 or g == chip.stop_event]
         if not weeks:
             continue
-        chip_gws.setdefault(chip.name, []).extend(weeks)
+        chip_gws[chip.key] = weeks
         later = [g for g in xp_all.columns if horizon_end < g <= chip.stop_event]
         if not later:
-            hold[chip.name] = 0.0
+            hold[chip.key] = 0.0
         elif chip.name == "3xc":
-            hold[chip.name] = max(float(xp_all.loc[state.players, g].max()) for g in later)
+            hold[chip.key] = max(float(xp_all.loc[state.players, g].max()) for g in later)
         elif chip.name == "bboost":
             vals = []
             for g in later:
                 _, bench, _, _ = opt.next_gw_lineup(state.players, xp_all[g], ptype)
                 vals.append(float(xp_all.loc[bench, g].sum()))
-            hold[chip.name] = max(vals)
+            hold[chip.key] = max(vals)
         else:
-            hold[chip.name] = float(fixed.get(chip.name, 0.0))
+            hold[chip.key] = float(fixed.get(chip.name, 0.0))
     return chip_gws, hold
 
 
@@ -172,7 +177,10 @@ def make_advice(api: FplApi, settings: dict, now: datetime | None = None) -> dic
     state: SquadState = data["state"]
     gw0 = state.next_event
     horizon = list(range(gw0, min(gw0 + settings["horizon"], LAST_GW + 1)))
-    last_chip_gw = max([c.stop_event for c in state.available_chips(gw0)] + [horizon[-1]])
+    # Project to the end of every unused chip window the horizon touches (including a
+    # second chip set that opens inside it), so hold values can look past the horizon.
+    open_chips = [c for c in state.chips if c.used_event is None and c.start_event <= horizon[-1] and c.stop_event >= gw0]
+    last_chip_gw = max([c.stop_event for c in open_chips] + [horizon[-1]])
     xp_all = project_live(data, settings, list(range(gw0, min(last_chip_gw, LAST_GW) + 1)), now)
     ptype = data["players"].set_index("element")["element_type"].to_dict()
     fixture_count = data["fixtures"].groupby("gw").size().to_dict()
@@ -267,8 +275,8 @@ def serialise(data, settings, now, horizon, xp, best, alts, chip_gws, chip_hold)
                 "start": c.start_event,
                 "stop": c.stop_event,
                 "used": c.used_event,
-                "allowed_now": c.name in chip_gws and c.start_event <= gw0 <= c.stop_event,
-                "hold_value": round(chip_hold.get(c.name, 0.0), 1) if c.start_event <= gw0 <= c.stop_event else None,
+                "allowed_now": c.key in chip_gws and c.start_event <= gw0 <= c.stop_event,
+                "hold_value": round(chip_hold.get(c.key, 0.0), 1) if c.start_event <= gw0 <= c.stop_event else None,
             }
             for c in state.chips
         ],
