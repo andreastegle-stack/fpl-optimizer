@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T09:00:30+00:00",
+ "generated_at": "2026-10-31T10:20:56+00:00",
  "gw": 9,
  "deadline": "2026-10-31T11:00:00Z",
  "horizon": [
@@ -2862,8 +2862,8 @@
    "news": "Thigh injury - Unknown return date"
   }
  ],
- "mode": "deadline",
+ "mode": "refresh",
  "deadline_run": true,
- "refresh_run": false,
+ "refresh_run": true,
  "emailed": true
 }
