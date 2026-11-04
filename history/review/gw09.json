@@ -1,0 +1,260 @@
+{
+ "gw": 9,
+ "final": true,
+ "has_projections": true,
+ "result": {
+  "points": 57,
+  "gross": 57,
+  "hits": 0,
+  "average": 47,
+  "highest": 122,
+  "gw_rank": 2361403,
+  "overall_rank": 2627764,
+  "prev_overall_rank": 3011673,
+  "total": 545,
+  "top10k_total": 662,
+  "chip": "Wildcard",
+  "bench_points": 13
+ },
+ "transfers": [
+  {
+   "in": "Kostoulas",
+   "out": "João Pedro",
+   "pts_in": 2,
+   "pts_out": 0,
+   "xp_in": null,
+   "xp_out": 0.0,
+   "exp_gain_horizon": null
+  },
+  {
+   "in": "Rudoni",
+   "out": "E.Le Fée",
+   "pts_in": 9,
+   "pts_out": 8,
+   "xp_in": 3.75,
+   "xp_out": 4.15,
+   "exp_gain_horizon": -1.0299999999999976
+  },
+  {
+   "in": "Dewsbury-Hall",
+   "out": "I.Sangaré",
+   "pts_in": 4,
+   "pts_out": 0,
+   "xp_in": 4.73,
+   "xp_out": 1.0,
+   "exp_gain_horizon": 22.67
+  },
+  {
+   "in": "Tavernier",
+   "out": "Szoboszlai",
+   "pts_in": 3,
+   "pts_out": 1,
+   "xp_in": 4.59,
+   "xp_out": 0.95,
+   "exp_gain_horizon": 18.259999999999998
+  },
+  {
+   "in": "Mbeumo",
+   "out": "Saka",
+   "pts_in": 1,
+   "pts_out": 0,
+   "xp_in": 4.57,
+   "xp_out": 0.0,
+   "exp_gain_horizon": 11.689999999999998
+  },
+  {
+   "in": "De Cuyper",
+   "out": "Mitchell",
+   "pts_in": 9,
+   "pts_out": 3,
+   "xp_in": 4.5,
+   "xp_out": 3.66,
+   "exp_gain_horizon": 8.469999999999999
+  },
+  {
+   "in": "Justin",
+   "out": "Kayode",
+   "pts_in": 2,
+   "pts_out": 5,
+   "xp_in": null,
+   "xp_out": 2.96,
+   "exp_gain_horizon": null
+  },
+  {
+   "in": "Tarkowski",
+   "out": "Calafiori",
+   "pts_in": 6,
+   "pts_out": 6,
+   "xp_in": 4.86,
+   "xp_out": 3.15,
+   "exp_gain_horizon": 5.120000000000001
+  },
+  {
+   "in": "Benitez",
+   "out": "Tzolakis",
+   "pts_in": 0,
+   "pts_out": 1,
+   "xp_in": null,
+   "xp_out": 4.27,
+   "exp_gain_horizon": null
+  },
+  {
+   "in": "Raya",
+   "out": "Verbruggen",
+   "pts_in": 5,
+   "pts_out": 11,
+   "xp_in": null,
+   "xp_out": 3.52,
+   "exp_gain_horizon": null
+  }
+ ],
+ "hit_cost": 0,
+ "captain": {
+  "name": "Haaland",
+  "chip": false,
+  "pts": 2,
+  "total": 4,
+  "xp": 6.93,
+  "best_name": "Van Hecke",
+  "best_pts": 15,
+  "lost_vs_best": 13,
+  "model_pick": null,
+  "model_pick_xp": null,
+  "model_pick_pts": null,
+  "vs_model": null
+ },
+ "bench": {
+  "points_left": 13,
+  "chip": false,
+  "hindsight_gain": 8
+ },
+ "players": [
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": 4.47,
+   "pts": 15,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Holdt nullen",
+   "kind": "flaks"
+  },
+  {
+   "name": "Haaland",
+   "pos": "FWD",
+   "xp": 6.93,
+   "pts": 2,
+   "minutes": 90,
+   "captain": true,
+   "cause": "Fikk sjanser (xG+xA 0.5), men ingen mål eller målgivende",
+   "kind": "uflaks"
+  },
+  {
+   "name": "De Cuyper",
+   "pos": "DEF",
+   "xp": 4.5,
+   "pts": 9,
+   "minutes": 71,
+   "captain": false,
+   "cause": "1 mål/målgivende på xG+xA 0.2",
+   "kind": "flaks"
+  },
+  {
+   "name": "Mbeumo",
+   "pos": "MID",
+   "xp": 4.57,
+   "pts": 1,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Lite involvert i kampen",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "xp": 4.4,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Groß",
+   "pos": "MID",
+   "xp": 4.33,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Tavernier",
+   "pos": "MID",
+   "xp": 4.59,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Tarkowski",
+   "pos": "DEF",
+   "xp": 4.86,
+   "pts": 6,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Dewsbury-Hall",
+   "pos": "MID",
+   "xp": 4.73,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Gabriel",
+   "pos": "DEF",
+   "xp": 5.76,
+   "pts": 6,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Raya",
+   "pos": "GK",
+   "xp": null,
+   "pts": 5,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  }
+ ],
+ "advice": {
+  "points": 56,
+  "xp": 55.73,
+  "captain": "Haaland",
+  "buys": [
+   "Dewsbury-Hall"
+  ],
+  "sells": [
+   "Saka"
+  ],
+  "chip": null
+ },
+ "lessons": [],
+ "summary": [
+  "GW9: 57 poeng (snitt 47), plass 3,01 mill → 2,63 mill.",
+  "Kaptein Haaland: 4 poeng; beste i laget var Van Hecke med 15."
+ ]
+}
