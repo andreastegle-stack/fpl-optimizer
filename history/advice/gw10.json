@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-06T08:24:03+00:00",
+ "generated_at": "2026-11-06T16:30:37+00:00",
  "gw": 10,
  "deadline": "2026-11-06T18:30:00Z",
  "horizon": [
@@ -432,7 +432,7 @@
  "alternatives": [
   {
    "label": "roll",
-   "objective": 301.25,
+   "objective": 301.26,
    "xp_next": 64.54,
    "xp_horizon": 374.26,
    "weeks": [
@@ -2743,8 +2743,8 @@
    "news": "Foot injury - 75% chance of playing"
   }
  ],
- "mode": "morning",
- "deadline_run": false,
+ "mode": "deadline",
+ "deadline_run": true,
  "refresh_run": false,
- "emailed": false
+ "emailed": true
 }
