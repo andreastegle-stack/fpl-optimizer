@@ -1,0 +1,218 @@
+{
+ "gw": 10,
+ "final": true,
+ "has_projections": true,
+ "result": {
+  "points": 71,
+  "gross": 71,
+  "hits": 0,
+  "average": 55,
+  "highest": 139,
+  "gw_rank": 1164487,
+  "overall_rank": 2079290,
+  "prev_overall_rank": 2627764,
+  "total": 616,
+  "top10k_total": 731,
+  "chip": "Bench Boost",
+  "bench_points": 0
+ },
+ "transfers": [
+  {
+   "in": "Kinsky",
+   "out": "Benitez",
+   "pts_in": 2,
+   "pts_out": 0,
+   "xp_in": null,
+   "xp_out": 2.78,
+   "exp_gain_horizon": null
+  }
+ ],
+ "hit_cost": 0,
+ "captain": {
+  "name": "Haaland",
+  "chip": false,
+  "pts": 2,
+  "total": 4,
+  "xp": 7.24,
+  "best_name": "Groß",
+  "best_pts": 10,
+  "lost_vs_best": 8,
+  "model_pick": "Haaland",
+  "model_pick_xp": 7.24,
+  "model_pick_pts": 2,
+  "vs_model": 0
+ },
+ "bench": {
+  "points_left": 0,
+  "chip": true
+ },
+ "players": [
+  {
+   "name": "Haaland",
+   "pos": "FWD",
+   "xp": 7.24,
+   "pts": 2,
+   "minutes": 90,
+   "captain": true,
+   "cause": "Fikk sjanser (xG+xA 0.5), men ingen mål eller målgivende",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Groß",
+   "pos": "MID",
+   "xp": 4.8,
+   "pts": 10,
+   "minutes": 90,
+   "captain": false,
+   "cause": "2 bonuspoeng",
+   "kind": "flaks"
+  },
+  {
+   "name": "Justin",
+   "pos": "DEF",
+   "xp": 4.13,
+   "pts": 9,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Holdt nullen",
+   "kind": "flaks"
+  },
+  {
+   "name": "Dewsbury-Hall",
+   "pos": "MID",
+   "xp": 4.97,
+   "pts": 9,
+   "minutes": 90,
+   "captain": false,
+   "cause": "1 mål/målgivende på xG+xA 0.3",
+   "kind": "flaks"
+  },
+  {
+   "name": "Tarkowski",
+   "pos": "DEF",
+   "xp": 5.19,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Lite involvert i kampen",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Mbeumo",
+   "pos": "MID",
+   "xp": 4.71,
+   "pts": 2,
+   "minutes": 82,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Kostoulas",
+   "pos": "FWD",
+   "xp": 4.2,
+   "pts": 2,
+   "minutes": 81,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Rudoni",
+   "pos": "MID",
+   "xp": 3.97,
+   "pts": 2,
+   "minutes": 85,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Tavernier",
+   "pos": "MID",
+   "xp": 4.83,
+   "pts": 3,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Gabriel",
+   "pos": "DEF",
+   "xp": 6.59,
+   "pts": 8,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Calvert-Lewin",
+   "pos": "FWD",
+   "xp": 3.29,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Raya",
+   "pos": "GK",
+   "xp": 5.04,
+   "pts": 6,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "De Cuyper",
+   "pos": "DEF",
+   "xp": 5.12,
+   "pts": 6,
+   "minutes": 81,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": 4.61,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Kinsky",
+   "pos": "GK",
+   "xp": null,
+   "pts": 2,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  }
+ ],
+ "advice": {
+  "points": 57,
+  "xp": 65.16,
+  "captain": "Haaland",
+  "buys": [
+   "Rice"
+  ],
+  "sells": [
+   "Mbeumo"
+  ],
+  "chip": null
+ },
+ "lessons": [],
+ "summary": [
+  "GW10: 71 poeng (snitt 55), plass 2,63 mill → 2,08 mill.",
+  "Kaptein Haaland: 4 poeng; beste i laget var Groß med 10."
+ ]
+}
