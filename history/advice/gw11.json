@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-20T08:59:40+00:00",
+ "generated_at": "2026-11-21T08:40:29+00:00",
  "gw": 11,
  "deadline": "2026-11-21T11:00:00Z",
  "horizon": [
@@ -228,7 +228,7 @@
     "vice": 411,
     "hits": 0,
     "free_transfers": 2,
-    "bank": 9,
+    "bank": 8,
     "xp": 59.94
    },
    {
@@ -280,7 +280,7 @@
     "vice": 4,
     "hits": 0,
     "free_transfers": 1,
-    "bank": 1,
+    "bank": 0,
     "xp": 61.31
    },
    {
@@ -328,7 +328,7 @@
     "vice": 411,
     "hits": 0,
     "free_transfers": 1,
-    "bank": 1,
+    "bank": 0,
     "xp": 64.01
    },
    {
@@ -376,7 +376,7 @@
     "vice": 411,
     "hits": 0,
     "free_transfers": 2,
-    "bank": 1,
+    "bank": 0,
     "xp": 61.86
    },
    {
@@ -424,7 +424,7 @@
     "vice": 4,
     "hits": 0,
     "free_transfers": 3,
-    "bank": 1,
+    "bank": 0,
     "xp": 65.19
    }
   ]
@@ -485,7 +485,7 @@
      "vice": 4,
      "hits": 0,
      "free_transfers": 1,
-     "bank": 26,
+     "bank": 25,
      "xp": 63.07
     },
     {
@@ -537,7 +537,7 @@
      "vice": 411,
      "hits": 0,
      "free_transfers": 1,
-     "bank": 12,
+     "bank": 11,
      "xp": 59.94
     },
     {
@@ -589,7 +589,7 @@
      "vice": 4,
      "hits": 0,
      "free_transfers": 1,
-     "bank": 4,
+     "bank": 3,
      "xp": 61.31
     },
     {
@@ -637,7 +637,7 @@
      "vice": 411,
      "hits": 0,
      "free_transfers": 1,
-     "bank": 4,
+     "bank": 3,
      "xp": 64.01
     },
     {
@@ -685,7 +685,7 @@
      "vice": 411,
      "hits": 0,
      "free_transfers": 2,
-     "bank": 4,
+     "bank": 3,
      "xp": 61.71
     },
     {
@@ -733,7 +733,7 @@
      "vice": 4,
      "hits": 0,
      "free_transfers": 3,
-     "bank": 4,
+     "bank": 3,
      "xp": 65.19
     }
    ]
@@ -795,7 +795,7 @@
      "vice": 4,
      "hits": 1,
      "free_transfers": 1,
-     "bank": 12,
+     "bank": 11,
      "xp": 59.9
     },
     {
@@ -847,7 +847,7 @@
      "vice": 411,
      "hits": 0,
      "free_transfers": 1,
-     "bank": 4,
+     "bank": 3,
      "xp": 60.22
     },
     {
@@ -895,7 +895,7 @@
      "vice": 4,
      "hits": 0,
      "free_transfers": 1,
-     "bank": 4,
+     "bank": 3,
      "xp": 61.31
     },
     {
@@ -943,7 +943,7 @@
      "vice": 411,
      "hits": 0,
      "free_transfers": 2,
-     "bank": 4,
+     "bank": 3,
      "xp": 64.01
     },
     {
@@ -991,7 +991,7 @@
      "vice": 411,
      "hits": 0,
      "free_transfers": 3,
-     "bank": 4,
+     "bank": 3,
      "xp": 61.71
     },
     {
@@ -1039,7 +1039,7 @@
      "vice": 4,
      "hits": 0,
      "free_transfers": 4,
-     "bank": 4,
+     "bank": 3,
      "xp": 65.19
     }
    ]
@@ -1050,7 +1050,7 @@
    "name": "Raya",
    "team": "ARS",
    "pos": "GK",
-   "price": 6.2,
+   "price": 6.3,
    "sell_price": 6.2,
    "status": "a",
    "chance": null,
@@ -1932,8 +1932,8 @@
    "name": "Mbeumo",
    "team": "MUN",
    "pos": "MID",
-   "price": 7.9,
-   "sell_price": 7.9,
+   "price": 7.8,
+   "sell_price": 7.8,
    "status": "a",
    "chance": null,
    "news": "",
@@ -2245,8 +2245,8 @@
   }
  },
  "flags": [],
- "mode": "morning",
- "deadline_run": false,
+ "mode": "deadline",
+ "deadline_run": true,
  "refresh_run": false,
- "emailed": false
+ "emailed": true
 }
