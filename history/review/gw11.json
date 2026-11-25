@@ -1,0 +1,173 @@
+{
+ "gw": 11,
+ "final": true,
+ "has_projections": true,
+ "result": {
+  "points": 34,
+  "gross": 34,
+  "hits": 0,
+  "average": 35,
+  "highest": 106,
+  "gw_rank": 5829828,
+  "overall_rank": 2168960,
+  "prev_overall_rank": 2079290,
+  "total": 650,
+  "top10k_total": 769,
+  "chip": null,
+  "bench_points": 21
+ },
+ "transfers": [],
+ "hit_cost": 0,
+ "captain": {
+  "name": "Haaland",
+  "chip": false,
+  "pts": 2,
+  "total": 4,
+  "xp": 7.07,
+  "best_name": "Rudoni",
+  "best_pts": 10,
+  "lost_vs_best": 8,
+  "model_pick": "Haaland",
+  "model_pick_xp": 7.07,
+  "model_pick_pts": 2,
+  "vs_model": 0
+ },
+ "bench": {
+  "points_left": 21,
+  "chip": false,
+  "hindsight_gain": 22,
+  "model_xi_gain": -9,
+  "model_xi_expected_gain": 0.1599999999999966,
+  "model_changes": [
+   {
+    "in": "Mbeumo",
+    "out": "Rudoni"
+   }
+  ]
+ },
+ "players": [
+  {
+   "name": "Tarkowski",
+   "pos": "DEF",
+   "xp": 4.52,
+   "pts": -4,
+   "minutes": 39,
+   "captain": false,
+   "cause": "Bare 39 minutter",
+   "kind": "modell"
+  },
+  {
+   "name": "Rudoni",
+   "pos": "MID",
+   "xp": 4.17,
+   "pts": 10,
+   "minutes": 90,
+   "captain": false,
+   "cause": "2 mål/målgivende på xG+xA 0.4",
+   "kind": "flaks"
+  },
+  {
+   "name": "Gabriel",
+   "pos": "DEF",
+   "xp": 6.23,
+   "pts": 1,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Laget slapp inn 2 mål",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Haaland",
+   "pos": "FWD",
+   "xp": 7.07,
+   "pts": 2,
+   "minutes": 90,
+   "captain": true,
+   "cause": "Fikk sjanser (xG+xA 1.1), men ingen mål eller målgivende",
+   "kind": "uflaks"
+  },
+  {
+   "name": "De Cuyper",
+   "pos": "DEF",
+   "xp": 5.38,
+   "pts": 1,
+   "minutes": 90,
+   "captain": false,
+   "cause": "Laget slapp inn 2 mål",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Raya",
+   "pos": "GK",
+   "xp": 4.8,
+   "pts": 1,
+   "minutes": 69,
+   "captain": false,
+   "cause": "Laget slapp inn 2 mål",
+   "kind": "uflaks"
+  },
+  {
+   "name": "Kostoulas",
+   "pos": "FWD",
+   "xp": 4.43,
+   "pts": 1,
+   "minutes": 23,
+   "captain": false,
+   "cause": "Bare 23 minutter",
+   "kind": "modell"
+  },
+  {
+   "name": "Tavernier",
+   "pos": "MID",
+   "xp": 4.62,
+   "pts": 8,
+   "minutes": 90,
+   "captain": false,
+   "cause": "2 bonuspoeng",
+   "kind": "flaks"
+  },
+  {
+   "name": "Dewsbury-Hall",
+   "pos": "MID",
+   "xp": 4.56,
+   "pts": 2,
+   "minutes": 68,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Groß",
+   "pos": "MID",
+   "xp": 5.26,
+   "pts": 4,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  },
+  {
+   "name": "Van Hecke",
+   "pos": "DEF",
+   "xp": 4.85,
+   "pts": 6,
+   "minutes": 90,
+   "captain": false,
+   "cause": null,
+   "kind": null
+  }
+ ],
+ "advice": {
+  "points": 25,
+  "xp": 63.11,
+  "captain": "Haaland",
+  "buys": [],
+  "sells": [],
+  "chip": null
+ },
+ "lessons": [],
+ "summary": [
+  "GW11: 34 poeng (snitt 35), plass 2,08 mill → 2,17 mill.",
+  "Kaptein Haaland: 4 poeng; beste i laget var Rudoni med 10."
+ ]
+}
