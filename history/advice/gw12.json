@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T10:16:55+00:00",
+ "generated_at": "2026-11-26T07:43:08+00:00",
  "gw": 12,
  "deadline": "2026-11-27T18:30:00Z",
  "horizon": [
@@ -1362,7 +1362,7 @@
    "name": "Raya",
    "team": "ARS",
    "pos": "GK",
-   "price": 6.3,
+   "price": 6.2,
    "sell_price": 6.2,
    "status": "d",
    "chance": 50,
