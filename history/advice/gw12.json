@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T09:57:13+00:00",
+ "generated_at": "2026-11-27T07:21:43+00:00",
  "gw": 12,
  "deadline": "2026-11-27T18:30:00Z",
  "horizon": [
@@ -1614,7 +1614,7 @@
    "name": "De Cuyper",
    "team": "BHA",
    "pos": "DEF",
-   "price": 5.5,
+   "price": 5.6,
    "sell_price": 5.4,
    "status": "a",
    "chance": null,
@@ -2370,7 +2370,7 @@
    "name": "Haaland",
    "team": "MCI",
    "pos": "FWD",
-   "price": 15.8,
+   "price": 15.7,
    "sell_price": 15.6,
    "status": "a",
    "chance": 100,
@@ -2559,7 +2559,7 @@
    "name": "Kinsky",
    "team": "TOT",
    "pos": "GK",
-   "price": 4.4,
+   "price": 4.5,
    "sell_price": 4.4,
    "status": "a",
    "chance": null,
