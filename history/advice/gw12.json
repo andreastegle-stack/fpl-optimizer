@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-27T16:30:31+00:00",
+ "generated_at": "2026-11-27T17:50:38+00:00",
  "gw": 12,
  "deadline": "2026-11-27T18:30:00Z",
  "horizon": [
@@ -2696,8 +2696,8 @@
    "news": "Suspended until 13 Dec"
   }
  ],
- "mode": "deadline",
+ "mode": "refresh",
  "deadline_run": true,
- "refresh_run": false,
+ "refresh_run": true,
  "emailed": true
 }
