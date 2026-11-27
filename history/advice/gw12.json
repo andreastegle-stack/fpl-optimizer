@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-27T10:00:37+00:00",
+ "generated_at": "2026-11-27T16:30:31+00:00",
  "gw": 12,
  "deadline": "2026-11-27T18:30:00Z",
  "horizon": [
@@ -125,9 +125,9 @@
  ],
  "recommended": {
   "label": "recommended",
-  "objective": 294.08,
+  "objective": 294.53,
   "xp_next": 58.85,
-  "xp_horizon": 369.99,
+  "xp_horizon": 370.37,
   "weeks": [
    {
     "gw": 12,
@@ -285,7 +285,7 @@
     "hits": 0,
     "free_transfers": 1,
     "bank": 0,
-    "xp": 62.09
+    "xp": 62.47
    },
    {
     "gw": 15,
@@ -436,9 +436,9 @@
  "alternatives": [
   {
    "label": "roll",
-   "objective": 293.66,
+   "objective": 294.11,
    "xp_next": 58.02,
-   "xp_horizon": 369.16,
+   "xp_horizon": 369.54,
    "weeks": [
     {
      "gw": 12,
@@ -590,7 +590,7 @@
      "hits": 0,
      "free_transfers": 1,
      "bank": 0,
-     "xp": 62.09
+     "xp": 62.47
     },
     {
      "gw": 15,
@@ -740,9 +740,9 @@
   },
   {
    "label": "other_transfer",
-   "objective": 294.07,
+   "objective": 294.52,
    "xp_next": 58.85,
-   "xp_horizon": 369.99,
+   "xp_horizon": 370.37,
    "weeks": [
     {
      "gw": 12,
@@ -900,7 +900,7 @@
      "hits": 0,
      "free_transfers": 1,
      "bank": 0,
-     "xp": 62.09
+     "xp": 62.47
     },
     {
      "gw": 15,
@@ -1050,9 +1050,9 @@
   },
   {
    "label": "hit",
-   "objective": 289.53,
+   "objective": 289.98,
    "xp_next": 55.09,
-   "xp_horizon": 367.01,
+   "xp_horizon": 367.39,
    "weeks": [
     {
      "gw": 12,
@@ -1208,7 +1208,7 @@
      "hits": 0,
      "free_transfers": 1,
      "bank": 2,
-     "xp": 62.28
+     "xp": 62.66
     },
     {
      "gw": 15,
@@ -1365,13 +1365,13 @@
    "price": 6.2,
    "sell_price": 6.2,
    "status": "d",
-   "chance": 50,
-   "news": "Shoulder injury - 50% chance of playing",
+   "chance": 75,
+   "news": "Shoulder injury - 75% chance of playing",
    "form": 4.0,
    "xp": {
-    "12": 2.16,
-    "13": 2.88,
-    "14": 3.82,
+    "12": 3.24,
+    "13": 3.6,
+    "14": 4.2,
     "15": 4.58,
     "16": 4.58,
     "17": 4.84
@@ -2686,8 +2686,8 @@
   {
    "element": 1,
    "status": "d",
-   "chance": 50,
-   "news": "Shoulder injury - 50% chance of playing"
+   "chance": 75,
+   "news": "Shoulder injury - 75% chance of playing"
   },
   {
    "element": 229,
@@ -2696,8 +2696,8 @@
    "news": "Suspended until 13 Dec"
   }
  ],
- "mode": "morning",
- "deadline_run": false,
+ "mode": "deadline",
+ "deadline_run": true,
  "refresh_run": false,
- "emailed": false
+ "emailed": true
 }
